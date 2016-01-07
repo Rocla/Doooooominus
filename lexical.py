@@ -36,7 +36,7 @@ tokens = (
     'OPERATION_XOR',
     'OPERATION_NOT',
     'DOUBLE_DOTS',
-    'NUMBER_SIGN',
+    'NUMBER_SIGN',  #
     'TABULATION',
 ) + tuple(map(lambda s: s.upper(), reserved_words))
 
@@ -46,7 +46,8 @@ tokens = (
 
 literals = '(){}'
 # ignore tabulation and withe space
-t_ignore = ' \t'
+#t_ignore = ' \t'
+t_ignore = ' '
 
 
 def t_ID(t):
@@ -92,7 +93,7 @@ def t_NEWLINE(t):
     t.lexer.lineno += len(t.value)
 
 def t_TABULATION(t):
-    r'\t'
+    r'\t+'
     return t
 
 
