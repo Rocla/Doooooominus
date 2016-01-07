@@ -46,7 +46,7 @@ tokens = (
 
 literals = '(){}'
 # ignore tabulation and withe space
-t_ignore = ' \t'
+t_ignore = ' '
 
 
 def t_ID(t):
@@ -93,6 +93,7 @@ def t_NEWLINE(t):
 
 def t_TABULATION(t):
     r'\t'
+    t.value = "    "
     return t
 
 
