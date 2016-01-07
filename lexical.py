@@ -1,18 +1,15 @@
-
 import ply.lex as lex
 import os
 import sys
-
 
 "---------------------------------------"
 "   TOKEN                               "
 "---------------------------------------"
 
-
 reserved_words = (
-    'alterum', # if
-    'iterum', # while
-    'scriptor', # print line
+    'alterum',  # if
+    'iterum',  # while
+    'scriptor',  # print line
     'and',
     'or',
     'xor',
@@ -20,20 +17,18 @@ reserved_words = (
 )
 
 tokens = (
-    'ID',
-    'NUMBER',
-    'ADDITION',
-    'MULTIPLICATION',
-    'AFFECTATION',
-    'STRING',
-    'SEMICOL',
-) + tuple(map(lambda s:s.upper(),reserved_words))
-
+             'ID',
+             'NUMBER',
+             'ADDITION',
+             'MULTIPLICATION',
+             'AFFECTATION',
+             'STRING',
+             'SEMICOL',
+         ) + tuple(map(lambda s: s.upper(), reserved_words))
 
 "---------------------------------------"
 "   RULES                               "
 "---------------------------------------"
-
 
 literals = '(){}'
 # ignore tabulation and withe space
@@ -79,8 +74,8 @@ def t_STRING(t):
 
 
 def t_NEWLINE(t):
-	r'\n+'
-	t.lexer.lineno += len(t.value)
+    r'\n+'
+    t.lexer.lineno += len(t.value)
 
 
 "---------------------------------------"
@@ -97,23 +92,22 @@ def t_error(t):
 "   MAIN TEST                           "
 "---------------------------------------"
 
-
 lex.lex()
 
 
 def main(args):
     # Handle command-line arguments
     if len(args) != 2:
-        print >>sys.stderr, "Usage: python lexical INPUT-FILE OUTPUT-FILE"
+        print >> sys.stderr, "Usage: python lexical INPUT-FILE OUTPUT-FILE"
         sys.exit(1)
 
     input = args[0]
     if not os.path.exists(input):
-        print >>sys.stderr, input + ": File does not exist"
+        print >> sys.stderr, input + ": File does not exist"
         sys.exit(1)
 
     if not os.path.isfile(input):
-        print >>sys.stderr, input + ": Not a file"
+        print >> sys.stderr, input + ": Not a file"
         sys.exit(1)
 
     output = args[1]
@@ -135,7 +129,7 @@ def main(args):
         print(result)
         tokensList.append(tok)
 
-    print("Token creation ended with succes. Number of tokensList : %d" % len(tokensList))
+    print("Token creation ended with success. Number of tokensList : %d" % len(tokensList))
 
 
 if __name__ == "__main__":
