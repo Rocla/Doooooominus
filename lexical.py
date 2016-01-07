@@ -36,7 +36,7 @@ tokens = (
     'OPERATION_XOR',
     'OPERATION_NOT',
     'DOUBLE_DOTS',
-    'NUMBER_SIGN',
+    'NUMBER_SIGN',  #
     'TABULATION',
 ) + tuple(map(lambda s: s.upper(), reserved_words))
 
@@ -93,7 +93,6 @@ def t_NEWLINE(t):
 
 def t_TABULATION(t):
     r'\t'
-    t.value = "    "
     return t
 
 

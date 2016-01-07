@@ -5,19 +5,3 @@ alterum banana est vera ergo
 
 iterum banana est vera ergo
     scriptor "ERAAAAAAAAA"
-	toto = "tatata"
-
-variableX = LMMCCXII;
-tet  =	(3+2)*3;
-
-asdasd2 = "testdes haine"
-if TOTO or tata ororor
-
-
-
-
-
-
-
-
-if
