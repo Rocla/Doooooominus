@@ -120,7 +120,7 @@ def main(args):
         if not tok:
             break
 
-        result = "line %d %s (%s) " % (tok.lineno, tok.type, tok.value)
+        result = "%s %s" % (tok.type, tok.value) #%d tok.lineno
         fileResult.write(result + "\n")
         print(result)
         tokensList.append(tok)

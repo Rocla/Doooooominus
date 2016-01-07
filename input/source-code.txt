@@ -1,21 +1,25 @@
-banana est vera #comment
+banana est vera. comment banana lover
 
 alterum banana est vera ergo
-    scriptor sententiam principium dooooooominous sententiam finis
+initium
+    scriptor sententiam principium dooooooominous sententiam finis.
+exitus.
 
 iterum banana est vera ergo
-    scriptor sententiam principium ERAAAAAAAAA sententiam finis
+initium
+    scriptor sententiam principium ERAAAAAAAAA sententiam finis.
+exitus.
 
-potato est 123
-scriptor potato
-potato est (3 addo 2) multiplico 3
-scriptor potato
+potato est 123.
+scriptor potato.
+potato est (3 addo 2) multiplico 3.
+scriptor potato.
 
-hello est vera et falsa
-scriptor world
+hello est vera et falsa.
+scriptor world.
 
-world est vera vel falsa
-scriptor world
+world est vera vel falsa.
+scriptor world.
 
-grumeau est vera xor vera
-scriptor grumeau
+grumeau est vera xor vera.
+scriptor grumeau.

@@ -1,22 +1,30 @@
 import ply.yacc as yacc
+
 import ast
 from lexical import tokens
 import sys
 
 precedence = (
-    ('left', 'ID'),
-    ('left', 'NUMBER'),
+#     ('left', 'ID'),
+#     ('left', 'NUMBER'),
 )
 
+# dictionary of names (for storing variables)
+names = {}
+
+def p_assign(p):
+   """assign : ID EST expr"""
+   for element in p:
+       print(element)
 
 def p_expression_id(p):
-    """expression : ID"""
+    """expression : ID expression"""
     for element in p:
         print(element)
-
-
-def p_expression_number(p):
-    """expression : NUMBER"""
+#
+#
+# def p_expression_num(p):
+#     """expression : NUMBER"""
 
 
 def p_expression_comment(p):
@@ -73,12 +81,6 @@ def p_expression_true(p):
 
 def p_expression_false(p):
     """expression : FALSA"""
-
-
-def p_expression_affectation(p):
-    """expression : expression EST expression"""
-    for element in p:
-        print(element)
 
 
 def p_expression_then(p):
