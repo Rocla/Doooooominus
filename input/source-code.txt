@@ -1,7 +1,21 @@
-banana est vera
+banana est vera #comment
 
 alterum banana est vera ergo
-    scriptor "dooooooominous"
+    scriptor sententiam principium dooooooominous sententiam finis
 
 iterum banana est vera ergo
-    scriptor "ERAAAAAAAAA"
+    scriptor sententiam principium ERAAAAAAAAA sententiam finis
+
+potato est 123
+scriptor potato
+potato est (3 addo 2) multiplico 3
+scriptor potato
+
+hello est vera et falsa
+scriptor world
+
+world est vera vel falsa
+scriptor world
+
+grumeau est vera xor vera
+scriptor grumeau

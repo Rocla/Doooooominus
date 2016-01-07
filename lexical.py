@@ -8,35 +8,27 @@ import sys
 
 reserved_words = [
     'alterum',  # if
+    'aut',  # else
     'iterum',  # while
     'scriptor',  # print line
-    'and',
-    'or',
+    'et',  # and
+    'vel',  # or
     'xor',
-    'not',
+    'non',  # not
     'vera',  # true
     'falsa',  # false
     'est',  # is
     'ergo',  # then
+    'multiplico',  # multiply
+    'addo',  # add
+
 ]
 
 tokens = (
     'ID',
     'NUMBER',
-    'ADDITION',
-    'MULTIPLICATION',
-    'AFFECTATION',
     'STRING',
-    'SEMICOL',
-    'CONDITION_IF',
-    'CONDITION_WHILE',
-    'PRINT',
-    'OPERATION_AND',
-    'OPERATION_OR',
-    'OPERATION_XOR',
-    'OPERATION_NOT',
-    'DOUBLE_DOTS',
-    'NUMBER_SIGN',  #
+    'COMMENT',  #
     'TABULATION',
 ) + tuple(map(lambda s: s.upper(), reserved_words))
 
@@ -49,15 +41,16 @@ literals = '(){}'
 t_ignore = ' '
 
 
+#'sententia',  # string
+
+def t_STRING(t):
+    r'sententia[^sententia]+sententia'
+    return t
+
 def t_ID(t):
     r'[A-Za-z_]\w*'
     if t.value in reserved_words:
         t.type = t.value.upper()
-    return t
-
-
-def t_SEMICOL(t):
-    r';'
     return t
 
 
@@ -67,23 +60,8 @@ def t_NUMBER(t):
     return t
 
 
-def t_ADDITION(t):
-    r'-|\+'
-    return t
-
-
-def t_AFFECTATION(t):
-    r'='
-    return t
-
-
-def t_MULTIPLICATION(t):
-    r'/|\*'
-    return t
-
-
-def t_STRING(t):
-    r'"[^"]+"'
+def t_COMMENT(t):
+    r'\#'
     return t
 
 
@@ -142,7 +120,7 @@ def main(args):
         if not tok:
             break
 
-        result = "line %d : %s (%s) " % (tok.lineno, tok.type, tok.value)
+        result = "line %d %s (%s) " % (tok.lineno, tok.type, tok.value)
         fileResult.write(result + "\n")
         print(result)
         tokensList.append(tok)
@@ -151,5 +129,6 @@ def main(args):
 
 
 if __name__ == "__main__":
-    main(["input/source-code.txt", "compiled/source-code.txt"])
+    #main(["input/source-code.txt", "compiled/source-code.txt"])
+    main(["input/source-code-simple.txt", "compiled/source-code.txt"])
     #main(sys.argv[1:])
