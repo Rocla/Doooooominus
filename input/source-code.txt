@@ -1,3 +1,11 @@
+banana est vera
+
+alterum banana est vera ergo
+    scriptor "dooooooominous"
+
+iterum banana est vera ergo
+    scriptor "ERAAAAAAAAA"
+
 variableX = 123;
 tet  =	(3+2)*3;
 

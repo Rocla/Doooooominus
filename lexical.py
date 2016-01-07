@@ -6,7 +6,7 @@ import sys
 "   TOKEN                               "
 "---------------------------------------"
 
-reserved_words = (
+reserved_words = [
     'alterum',  # if
     'iterum',  # while
     'scriptor',  # print line
@@ -14,17 +14,31 @@ reserved_words = (
     'or',
     'xor',
     'not',
-)
+    'vera',  # true
+    'falsa',  # false
+    'est',  # is
+    'ergo',  # then
+]
 
 tokens = (
-             'ID',
-             'NUMBER',
-             'ADDITION',
-             'MULTIPLICATION',
-             'AFFECTATION',
-             'STRING',
-             'SEMICOL',
-         ) + tuple(map(lambda s: s.upper(), reserved_words))
+    'ID',
+    'NUMBER',
+    'ADDITION',
+    'MULTIPLICATION',
+    'AFFECTATION',
+    'STRING',
+    'SEMICOL',
+    'CONDITION_IF',
+    'CONDITION_WHILE',
+    'PRINT',
+    'OPERATION_AND',
+    'OPERATION_OR',
+    'OPERATION_XOR',
+    'OPERATION_NOT',
+    'DOUBLE_DOTS',
+    'NUMBER_SIGN',
+    'TABULATION',
+) + tuple(map(lambda s: s.upper(), reserved_words))
 
 "---------------------------------------"
 "   RULES                               "
@@ -77,6 +91,10 @@ def t_NEWLINE(t):
     r'\n+'
     t.lexer.lineno += len(t.value)
 
+def t_TABULATION(t):
+    r'\t'
+    return t
+
 
 "---------------------------------------"
 "   OUTPUT                              "
@@ -124,7 +142,7 @@ def main(args):
         if not tok:
             break
 
-        result = "line %d : %s (%s ) " % (tok.lineno, tok.type, tok.value)
+        result = "line %d : %s (%s) " % (tok.lineno, tok.type, tok.value)
         fileResult.write(result + "\n")
         print(result)
         tokensList.append(tok)
@@ -133,4 +151,5 @@ def main(args):
 
 
 if __name__ == "__main__":
-    main(sys.argv[1:])
+    main(["input/source-code.txt", "compiled/source-code.txt"])
+    #main(sys.argv[1:])
