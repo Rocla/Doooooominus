@@ -1,10 +1,9 @@
-import os
 import sys
-
+import os
 from lf_lexer import LF_Lexer
 from lf_parser import LF_Parser
 
-# List of reserved words
+# Reserved words
 reserved_words = {
 
     # Conditions
@@ -41,8 +40,8 @@ reserved_words = {
     'humilior': 'LOWERTHEN',
     'maior': 'GREATERTHEN',
     'idem': 'EQUAL',
-    #'humilior vel idem': 'LOWEREQUAL', # do it in the parser
-    #'maior vel idem': 'GREATEREQUAL', # do it in the parser
+    # 'humilior vel idem': 'LOWEREQUAL', # do it in the parser
+    # 'maior vel idem': 'GREATEREQUAL', # do it in the parser
     'diversus': 'NOTEQUAL',
 
     # Words
@@ -51,14 +50,24 @@ reserved_words = {
     'finis': 'STRINGSTOP',
 
     # Comment
-    'comment': 'COMMENT'
+    'comment': 'COMMENT',
+
+    # Brain fuck specific
+    'dextram': 'GORIGHT',
+    'sinistram': 'GOLEFT',
+    'incrementum': 'INCREMENT',
+    'decrementum': 'DECREMENT',
+    'dum': 'WHILESTART',
+    'dumes': 'WHILEEND',
+    'imprimo': 'BFPRINT',
+    'lectito': 'READ',
 
 }
 
-# List of tokens
-tokens = (
+# Tokens
+tokens = [
 
-    # Variables
+    # Variable
     'ID',
 
     # Numbers
@@ -69,13 +78,19 @@ tokens = (
     'LEFTPARENTHESIS',
     'RIGHTPARENTHESIS',
 
-    # Delimiters
+    # Delimiter
     'DOT',
 
-) + tuple(map(lambda s: s.upper(), reserved_words))
+    # TMP: Relational operators
+    'LOWEREQUAL',
+    'GREATEREQUAL',
+
+]
+
+tokens += list(reserved_words.values())
+
 
 def main(args):
-
     # Handle command-line arguments
     if len(args) != 2:
         print >> sys.stderr, "Usage: python lexical INPUT-FILE OUTPUT-FILE"
@@ -91,21 +106,25 @@ def main(args):
         sys.exit(1)
 
     input = open(args[0], "r").read()
-    #output = open(args[1], 'w+')
+    # output = open(args[1], 'w+')
 
     # Run of the Latin F*ck lexer
     lexer = LF_Lexer(tokens, reserved_words)
     lexer.setup()
     lexer.tokenize(input)
-    #lexer.print_tokens(True)
+    lexer.print_tokens(True)
 
     # Run of the Latin F*ck parser
-    parser = LF_Parser(tokens)
+    parser = LF_Parser(tokens, False)
     parser.setup()
     parser.parse(input, debug=0)
+    parser.setup_ast()
+    parser.print_ast(False)
 
+    print("")
     print("aedificavit prospere!")
 
+
 if __name__ == "__main__":
-    #main(["input/source-code.txt", "compiled/source-code.txt"])
-    main(["input/source-code-simple.txt", "compiled/source-code.txt"])
+    # main(["input/source-code", "compiled/source-code"])
+    main(["input/source-code-simple", "compiled/source-code"])

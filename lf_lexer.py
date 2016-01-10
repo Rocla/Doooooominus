@@ -1,6 +1,5 @@
 import ply.lex as lex
 
-
 class LF_Lexer:
     t_INTEGER = r'\d+'
     t_REAL = r'\d+\,\d+'
@@ -8,16 +7,19 @@ class LF_Lexer:
     t_RIGHTPARENTHESIS = r'\)'
     t_DOT = r'.'
 
+    # TMP
+    t_LOWEREQUAL = r'<='
+    t_GREATEREQUAL = r'>='
+
     t_ignore = ' \t'
 
     def __init__(self, tokens, reserved_words):
         self.tokens = tokens
-        self.reserved = reserved_words
+        self.reserved_words = reserved_words
 
     def t_ID(self, t):
         r'[A-Za-z_]\w*'
-        if t.value in self.reserved:
-            t.type = t.value.upper()
+        t.type = self.reserved_words.get(t.value, "ID")
         return t
 
     def t_newline(self, t):
@@ -27,17 +29,20 @@ class LF_Lexer:
     def tokenize(self, data):
         self.lexer.input(data)
 
+    # **kwargs for dictionaries
     def setup(self, **kwargs):
         self.lexer = lex.lex(module=self, **kwargs)
 
     def t_error(self, t):
-        print "Invalid char: %s" % t.value[0]
+        print "Invalid token: %s" % t.value[0]
         t.lexer.skip(1)
 
-    def print_tokens(self, print_tokens=False):
-        if print_tokens:
+    def print_tokens(self, verbose=False):
+        if verbose:
+            print("")
             while True:
                 token = self.lexer.token()
                 if not token:
                     break
                 print(token)
+            print("")
