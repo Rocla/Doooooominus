@@ -124,6 +124,7 @@ def main(args):
 
     generator = LF_Generator(parser.ast)
     generator.generate()
+    generator.print_code(True)
     generator.save(args[1])
 
     print("")

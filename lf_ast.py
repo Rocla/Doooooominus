@@ -132,6 +132,7 @@ class AST:
             separator = ""
             for i in range(node.get_ast_depth()):
                 separator += "- "
+            print "TOTOOTOTOTOT" +str(node.get_symbol_type)
             print(str(node.get_ast_depth()) + " " + str(separator) + str(node.get_name()))
 
             if isinstance(node, Expression_Node):
