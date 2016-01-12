@@ -25,6 +25,7 @@ class LF_Generator:
                 c.append("\t")
 
             if isinstance(node, Print_Node):
+                c.append("\n")
                 c.append("print ")
 
             elif isinstance(node, Number_Node):
@@ -44,31 +45,29 @@ class LF_Generator:
                 c.append("else ")
 
             elif isinstance(node, If_Node):
+                c.append("\n")
                 c.append("if ")
 
             elif isinstance(node, Assignment_Node):
+                c.append("\n")
                 c.append(node.target_id)
                 c.append(" = ")
-                for child in node.get_children():
-                    nodes.append(child)
-                c.append("\n")
 
             elif isinstance(node, Expression_Node):
                 c.append(str(node.expression_string))
 
             elif isinstance(node, Node):
                 print "unexpected case in generator : generic node given"
-                for child in node.get_children():
-                    nodes.append(child)
 
             else:
                 print "unexpected case in generator : no node type found"
-                
-            #for child in node.get_children():
-            #    nodes.append(child)
+
+            for child in node.get_children():
+                nodes.append(child)
 
 
         self.output = lst_import + c
+
 
     def print_code(self, verbose=False):
         if verbose:
