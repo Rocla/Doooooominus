@@ -113,14 +113,14 @@ def main(args):
     lexer = LF_Lexer(tokens, reserved_words)
     lexer.setup()
     lexer.tokenize(input)
-    lexer.print_tokens(True)
+    lexer.print_tokens(False)
 
     # Run of the Latin F*ck parser
     parser = LF_Parser(tokens, False)
     parser.setup()
     parser.parse(input, debug=0)
     parser.setup_ast()
-    parser.print_ast(False)
+    parser.print_ast(True)
 
     generator = LF_Generator(parser.ast)
     generator.generate()
@@ -132,4 +132,4 @@ def main(args):
 
 if __name__ == "__main__":
     # main(["input/source-code", "compiled/source-code"])
-    main(["input/source-code-simple", "compiled/source-code"])
+    main(["input/source-code-simple", "compiled/compiled-code"])

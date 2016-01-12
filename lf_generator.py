@@ -6,8 +6,8 @@ class LF_Generator:
         self.output = []
 
     def generate(self):
+        return 0
 
-
-    def save(file):
-        with open(file) as f:
-            f.writelines("".join(self.output)
+    def save(self, file):
+        with open(file, 'w') as f:
+            f.writelines("".join(self.output))
