@@ -17,6 +17,10 @@ class LF_Lexer:
         self.tokens = tokens
         self.reserved_words = reserved_words
 
+    def t_comment(self, t):
+        r'comment.+\n'
+        t.lexer.lineno += 1
+
     def t_ID(self, t):
         r'[A-Za-z_]\w*'
         t.type = self.reserved_words.get(t.value, "ID")
