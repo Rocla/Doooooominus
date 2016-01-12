@@ -1,0 +1,1516 @@
+Created by PLY version 3.4 (http://www.dabeaz.com/ply)
+
+Unused terminals:
+
+    INCREMENT
+    READ
+    WHILESTART
+    XOR
+    BFPRINT
+    TRUE
+    COMMENT
+    SENTENTIA
+    GORIGHT
+    GOLEFT
+    STRINGSTOP
+    AND
+    STRINGSTART
+    FALSE
+    WHILEEND
+    NOT
+    DECREMENT
+    OR
+
+Grammar
+
+Rule 0     S' -> base
+Rule 1     base -> <empty>
+Rule 2     base -> statements
+Rule 3     statements -> instruction
+Rule 4     statements -> statements instruction
+Rule 5     instruction -> PRINT expression DOT
+Rule 6     instruction -> ID ASSIGN expression DOT
+Rule 7     value -> ID
+Rule 8     value -> sign_arithmetic_operation ID
+Rule 9     value -> term_arithmetic_operation ID
+Rule 10    value -> INTEGER
+Rule 11    value -> sign_arithmetic_operation INTEGER
+Rule 12    value -> term_arithmetic_operation INTEGER
+Rule 13    value -> REAL
+Rule 14    value -> sign_arithmetic_operation REAL
+Rule 15    value -> term_arithmetic_operation REAL
+Rule 16    value -> LEFTPARENTHESIS expression RIGHTPARENTHESIS
+Rule 17    sign_arithmetic_operation -> PLUS
+Rule 18    sign_arithmetic_operation -> MINUS
+Rule 19    term_arithmetic_operation -> TIMES
+Rule 20    term_arithmetic_operation -> DIVIDE
+Rule 21    relational_equality_operation -> EQUAL
+Rule 22    relational_equality_operation -> NOTEQUAL
+Rule 23    relational_inequality_operation -> LOWEREQUAL
+Rule 24    relational_inequality_operation -> GREATEREQUAL
+Rule 25    relational_inequality_operation -> LOWERTHEN
+Rule 26    relational_inequality_operation -> GREATERTHEN
+Rule 27    expression -> expression relational_equality_operation comparison
+Rule 28    expression -> comparison
+Rule 29    comparison -> comparison relational_inequality_operation arithmetic_expression
+Rule 30    comparison -> arithmetic_expression
+Rule 31    arithmetic_expression -> arithmetic_expression sign_arithmetic_operation expression_term
+Rule 32    arithmetic_expression -> expression_term
+Rule 33    expression_term -> expression_term term_arithmetic_operation value
+Rule 34    expression_term -> value
+Rule 35    if_start -> IF
+Rule 36    if_expression -> expression
+Rule 37    if_then_begin -> THEN BEGIN
+Rule 38    if_else_begin -> ELSE BEGIN
+Rule 39    instruction -> if_start if_expression if_then_begin statements END DOT
+Rule 40    instruction -> if_start if_expression if_then_begin statements END if_else_begin statements END DOT
+Rule 41    while_start -> WHILE
+Rule 42    while_expression -> expression
+Rule 43    while_body -> DO statements DONE DOT
+Rule 44    instruction -> while_start while_expression while_body
+
+Terminals, with rules where they appear
+
+AND                  : 
+ASSIGN               : 6
+BEGIN                : 37 38
+BFPRINT              : 
+COMMENT              : 
+DECREMENT            : 
+DIVIDE               : 20
+DO                   : 43
+DONE                 : 43
+DOT                  : 5 6 39 40 43
+ELSE                 : 38
+END                  : 39 40 40
+EQUAL                : 21
+FALSE                : 
+GOLEFT               : 
+GORIGHT              : 
+GREATEREQUAL         : 24
+GREATERTHEN          : 26
+ID                   : 6 7 8 9
+IF                   : 35
+INCREMENT            : 
+INTEGER              : 10 11 12
+LEFTPARENTHESIS      : 16
+LOWEREQUAL           : 23
+LOWERTHEN            : 25
+MINUS                : 18
+NOT                  : 
+NOTEQUAL             : 22
+OR                   : 
+PLUS                 : 17
+PRINT                : 5
+READ                 : 
+REAL                 : 13 14 15
+RIGHTPARENTHESIS     : 16
+SENTENTIA            : 
+STRINGSTART          : 
+STRINGSTOP           : 
+THEN                 : 37
+TIMES                : 19
+TRUE                 : 
+WHILE                : 41
+WHILEEND             : 
+WHILESTART           : 
+XOR                  : 
+error                : 
+
+Nonterminals, with rules where they appear
+
+arithmetic_expression : 29 30 31
+base                 : 0
+comparison           : 27 28 29
+expression           : 5 6 16 27 36 42
+expression_term      : 31 32 33
+if_else_begin        : 40
+if_expression        : 39 40
+if_start             : 39 40
+if_then_begin        : 39 40
+instruction          : 3 4
+relational_equality_operation : 27
+relational_inequality_operation : 29
+sign_arithmetic_operation : 8 11 14 31
+statements           : 2 4 39 40 40 43
+term_arithmetic_operation : 9 12 15 33
+value                : 33 34
+while_body           : 44
+while_expression     : 44
+while_start          : 44
+
+Parsing method: LALR
+
+state 0
+
+    (0) S' -> . base
+    (1) base -> .
+    (2) base -> . statements
+    (3) statements -> . instruction
+    (4) statements -> . statements instruction
+    (5) instruction -> . PRINT expression DOT
+    (6) instruction -> . ID ASSIGN expression DOT
+    (39) instruction -> . if_start if_expression if_then_begin statements END DOT
+    (40) instruction -> . if_start if_expression if_then_begin statements END if_else_begin statements END DOT
+    (44) instruction -> . while_start while_expression while_body
+    (35) if_start -> . IF
+    (41) while_start -> . WHILE
+
+    $end            reduce using rule 1 (base -> .)
+    PRINT           shift and go to state 6
+    ID              shift and go to state 8
+    IF              shift and go to state 9
+    WHILE           shift and go to state 4
+
+    while_start                    shift and go to state 1
+    statements                     shift and go to state 2
+    instruction                    shift and go to state 3
+    base                           shift and go to state 5
+    if_start                       shift and go to state 7
+
+state 1
+
+    (44) instruction -> while_start . while_expression while_body
+    (42) while_expression -> . expression
+    (27) expression -> . expression relational_equality_operation comparison
+    (28) expression -> . comparison
+    (29) comparison -> . comparison relational_inequality_operation arithmetic_expression
+    (30) comparison -> . arithmetic_expression
+    (31) arithmetic_expression -> . arithmetic_expression sign_arithmetic_operation expression_term
+    (32) arithmetic_expression -> . expression_term
+    (33) expression_term -> . expression_term term_arithmetic_operation value
+    (34) expression_term -> . value
+    (7) value -> . ID
+    (8) value -> . sign_arithmetic_operation ID
+    (9) value -> . term_arithmetic_operation ID
+    (10) value -> . INTEGER
+    (11) value -> . sign_arithmetic_operation INTEGER
+    (12) value -> . term_arithmetic_operation INTEGER
+    (13) value -> . REAL
+    (14) value -> . sign_arithmetic_operation REAL
+    (15) value -> . term_arithmetic_operation REAL
+    (16) value -> . LEFTPARENTHESIS expression RIGHTPARENTHESIS
+    (17) sign_arithmetic_operation -> . PLUS
+    (18) sign_arithmetic_operation -> . MINUS
+    (19) term_arithmetic_operation -> . TIMES
+    (20) term_arithmetic_operation -> . DIVIDE
+
+    ID              shift and go to state 25
+    INTEGER         shift and go to state 21
+    REAL            shift and go to state 22
+    LEFTPARENTHESIS shift and go to state 19
+    PLUS            shift and go to state 15
+    MINUS           shift and go to state 17
+    TIMES           shift and go to state 20
+    DIVIDE          shift and go to state 11
+
+    arithmetic_expression          shift and go to state 10
+    expression_term                shift and go to state 12
+    comparison                     shift and go to state 13
+    term_arithmetic_operation      shift and go to state 14
+    sign_arithmetic_operation      shift and go to state 16
+    while_expression               shift and go to state 18
+    value                          shift and go to state 23
+    expression                     shift and go to state 24
+
+state 2
+
+    (2) base -> statements .
+    (4) statements -> statements . instruction
+    (5) instruction -> . PRINT expression DOT
+    (6) instruction -> . ID ASSIGN expression DOT
+    (39) instruction -> . if_start if_expression if_then_begin statements END DOT
+    (40) instruction -> . if_start if_expression if_then_begin statements END if_else_begin statements END DOT
+    (44) instruction -> . while_start while_expression while_body
+    (35) if_start -> . IF
+    (41) while_start -> . WHILE
+
+    $end            reduce using rule 2 (base -> statements .)
+    PRINT           shift and go to state 6
+    ID              shift and go to state 8
+    IF              shift and go to state 9
+    WHILE           shift and go to state 4
+
+    while_start                    shift and go to state 1
+    instruction                    shift and go to state 26
+    if_start                       shift and go to state 7
+
+state 3
+
+    (3) statements -> instruction .
+
+    END             reduce using rule 3 (statements -> instruction .)
+    PRINT           reduce using rule 3 (statements -> instruction .)
+    ID              reduce using rule 3 (statements -> instruction .)
+    IF              reduce using rule 3 (statements -> instruction .)
+    WHILE           reduce using rule 3 (statements -> instruction .)
+    DONE            reduce using rule 3 (statements -> instruction .)
+    $end            reduce using rule 3 (statements -> instruction .)
+
+
+state 4
+
+    (41) while_start -> WHILE .
+
+    ID              reduce using rule 41 (while_start -> WHILE .)
+    INTEGER         reduce using rule 41 (while_start -> WHILE .)
+    REAL            reduce using rule 41 (while_start -> WHILE .)
+    LEFTPARENTHESIS reduce using rule 41 (while_start -> WHILE .)
+    PLUS            reduce using rule 41 (while_start -> WHILE .)
+    MINUS           reduce using rule 41 (while_start -> WHILE .)
+    TIMES           reduce using rule 41 (while_start -> WHILE .)
+    DIVIDE          reduce using rule 41 (while_start -> WHILE .)
+
+
+state 5
+
+    (0) S' -> base .
+
+
+
+state 6
+
+    (5) instruction -> PRINT . expression DOT
+    (27) expression -> . expression relational_equality_operation comparison
+    (28) expression -> . comparison
+    (29) comparison -> . comparison relational_inequality_operation arithmetic_expression
+    (30) comparison -> . arithmetic_expression
+    (31) arithmetic_expression -> . arithmetic_expression sign_arithmetic_operation expression_term
+    (32) arithmetic_expression -> . expression_term
+    (33) expression_term -> . expression_term term_arithmetic_operation value
+    (34) expression_term -> . value
+    (7) value -> . ID
+    (8) value -> . sign_arithmetic_operation ID
+    (9) value -> . term_arithmetic_operation ID
+    (10) value -> . INTEGER
+    (11) value -> . sign_arithmetic_operation INTEGER
+    (12) value -> . term_arithmetic_operation INTEGER
+    (13) value -> . REAL
+    (14) value -> . sign_arithmetic_operation REAL
+    (15) value -> . term_arithmetic_operation REAL
+    (16) value -> . LEFTPARENTHESIS expression RIGHTPARENTHESIS
+    (17) sign_arithmetic_operation -> . PLUS
+    (18) sign_arithmetic_operation -> . MINUS
+    (19) term_arithmetic_operation -> . TIMES
+    (20) term_arithmetic_operation -> . DIVIDE
+
+    ID              shift and go to state 25
+    INTEGER         shift and go to state 21
+    REAL            shift and go to state 22
+    LEFTPARENTHESIS shift and go to state 19
+    PLUS            shift and go to state 15
+    MINUS           shift and go to state 17
+    TIMES           shift and go to state 20
+    DIVIDE          shift and go to state 11
+
+    arithmetic_expression          shift and go to state 10
+    comparison                     shift and go to state 13
+    expression_term                shift and go to state 12
+    sign_arithmetic_operation      shift and go to state 16
+    term_arithmetic_operation      shift and go to state 14
+    value                          shift and go to state 23
+    expression                     shift and go to state 27
+
+state 7
+
+    (39) instruction -> if_start . if_expression if_then_begin statements END DOT
+    (40) instruction -> if_start . if_expression if_then_begin statements END if_else_begin statements END DOT
+    (36) if_expression -> . expression
+    (27) expression -> . expression relational_equality_operation comparison
+    (28) expression -> . comparison
+    (29) comparison -> . comparison relational_inequality_operation arithmetic_expression
+    (30) comparison -> . arithmetic_expression
+    (31) arithmetic_expression -> . arithmetic_expression sign_arithmetic_operation expression_term
+    (32) arithmetic_expression -> . expression_term
+    (33) expression_term -> . expression_term term_arithmetic_operation value
+    (34) expression_term -> . value
+    (7) value -> . ID
+    (8) value -> . sign_arithmetic_operation ID
+    (9) value -> . term_arithmetic_operation ID
+    (10) value -> . INTEGER
+    (11) value -> . sign_arithmetic_operation INTEGER
+    (12) value -> . term_arithmetic_operation INTEGER
+    (13) value -> . REAL
+    (14) value -> . sign_arithmetic_operation REAL
+    (15) value -> . term_arithmetic_operation REAL
+    (16) value -> . LEFTPARENTHESIS expression RIGHTPARENTHESIS
+    (17) sign_arithmetic_operation -> . PLUS
+    (18) sign_arithmetic_operation -> . MINUS
+    (19) term_arithmetic_operation -> . TIMES
+    (20) term_arithmetic_operation -> . DIVIDE
+
+    ID              shift and go to state 25
+    INTEGER         shift and go to state 21
+    REAL            shift and go to state 22
+    LEFTPARENTHESIS shift and go to state 19
+    PLUS            shift and go to state 15
+    MINUS           shift and go to state 17
+    TIMES           shift and go to state 20
+    DIVIDE          shift and go to state 11
+
+    arithmetic_expression          shift and go to state 10
+    comparison                     shift and go to state 13
+    expression_term                shift and go to state 12
+    sign_arithmetic_operation      shift and go to state 16
+    term_arithmetic_operation      shift and go to state 14
+    if_expression                  shift and go to state 28
+    value                          shift and go to state 23
+    expression                     shift and go to state 29
+
+state 8
+
+    (6) instruction -> ID . ASSIGN expression DOT
+
+    ASSIGN          shift and go to state 30
+
+
+state 9
+
+    (35) if_start -> IF .
+
+    ID              reduce using rule 35 (if_start -> IF .)
+    INTEGER         reduce using rule 35 (if_start -> IF .)
+    REAL            reduce using rule 35 (if_start -> IF .)
+    LEFTPARENTHESIS reduce using rule 35 (if_start -> IF .)
+    PLUS            reduce using rule 35 (if_start -> IF .)
+    MINUS           reduce using rule 35 (if_start -> IF .)
+    TIMES           reduce using rule 35 (if_start -> IF .)
+    DIVIDE          reduce using rule 35 (if_start -> IF .)
+
+
+state 10
+
+    (30) comparison -> arithmetic_expression .
+    (31) arithmetic_expression -> arithmetic_expression . sign_arithmetic_operation expression_term
+    (17) sign_arithmetic_operation -> . PLUS
+    (18) sign_arithmetic_operation -> . MINUS
+
+    LOWEREQUAL      reduce using rule 30 (comparison -> arithmetic_expression .)
+    GREATEREQUAL    reduce using rule 30 (comparison -> arithmetic_expression .)
+    LOWERTHEN       reduce using rule 30 (comparison -> arithmetic_expression .)
+    GREATERTHEN     reduce using rule 30 (comparison -> arithmetic_expression .)
+    RIGHTPARENTHESIS reduce using rule 30 (comparison -> arithmetic_expression .)
+    EQUAL           reduce using rule 30 (comparison -> arithmetic_expression .)
+    NOTEQUAL        reduce using rule 30 (comparison -> arithmetic_expression .)
+    DO              reduce using rule 30 (comparison -> arithmetic_expression .)
+    THEN            reduce using rule 30 (comparison -> arithmetic_expression .)
+    DOT             reduce using rule 30 (comparison -> arithmetic_expression .)
+    PLUS            shift and go to state 15
+    MINUS           shift and go to state 17
+
+    sign_arithmetic_operation      shift and go to state 31
+
+state 11
+
+    (20) term_arithmetic_operation -> DIVIDE .
+
+    ID              reduce using rule 20 (term_arithmetic_operation -> DIVIDE .)
+    INTEGER         reduce using rule 20 (term_arithmetic_operation -> DIVIDE .)
+    REAL            reduce using rule 20 (term_arithmetic_operation -> DIVIDE .)
+    LEFTPARENTHESIS reduce using rule 20 (term_arithmetic_operation -> DIVIDE .)
+    PLUS            reduce using rule 20 (term_arithmetic_operation -> DIVIDE .)
+    MINUS           reduce using rule 20 (term_arithmetic_operation -> DIVIDE .)
+    TIMES           reduce using rule 20 (term_arithmetic_operation -> DIVIDE .)
+    DIVIDE          reduce using rule 20 (term_arithmetic_operation -> DIVIDE .)
+
+
+state 12
+
+    (32) arithmetic_expression -> expression_term .
+    (33) expression_term -> expression_term . term_arithmetic_operation value
+    (19) term_arithmetic_operation -> . TIMES
+    (20) term_arithmetic_operation -> . DIVIDE
+
+    PLUS            reduce using rule 32 (arithmetic_expression -> expression_term .)
+    MINUS           reduce using rule 32 (arithmetic_expression -> expression_term .)
+    LOWEREQUAL      reduce using rule 32 (arithmetic_expression -> expression_term .)
+    GREATEREQUAL    reduce using rule 32 (arithmetic_expression -> expression_term .)
+    LOWERTHEN       reduce using rule 32 (arithmetic_expression -> expression_term .)
+    GREATERTHEN     reduce using rule 32 (arithmetic_expression -> expression_term .)
+    EQUAL           reduce using rule 32 (arithmetic_expression -> expression_term .)
+    NOTEQUAL        reduce using rule 32 (arithmetic_expression -> expression_term .)
+    DO              reduce using rule 32 (arithmetic_expression -> expression_term .)
+    DOT             reduce using rule 32 (arithmetic_expression -> expression_term .)
+    THEN            reduce using rule 32 (arithmetic_expression -> expression_term .)
+    RIGHTPARENTHESIS reduce using rule 32 (arithmetic_expression -> expression_term .)
+    TIMES           shift and go to state 20
+    DIVIDE          shift and go to state 11
+
+    term_arithmetic_operation      shift and go to state 32
+
+state 13
+
+    (28) expression -> comparison .
+    (29) comparison -> comparison . relational_inequality_operation arithmetic_expression
+    (23) relational_inequality_operation -> . LOWEREQUAL
+    (24) relational_inequality_operation -> . GREATEREQUAL
+    (25) relational_inequality_operation -> . LOWERTHEN
+    (26) relational_inequality_operation -> . GREATERTHEN
+
+    RIGHTPARENTHESIS reduce using rule 28 (expression -> comparison .)
+    EQUAL           reduce using rule 28 (expression -> comparison .)
+    NOTEQUAL        reduce using rule 28 (expression -> comparison .)
+    THEN            reduce using rule 28 (expression -> comparison .)
+    DOT             reduce using rule 28 (expression -> comparison .)
+    DO              reduce using rule 28 (expression -> comparison .)
+    LOWEREQUAL      shift and go to state 36
+    GREATEREQUAL    shift and go to state 35
+    LOWERTHEN       shift and go to state 34
+    GREATERTHEN     shift and go to state 37
+
+    relational_inequality_operation shift and go to state 33
+
+state 14
+
+    (9) value -> term_arithmetic_operation . ID
+    (12) value -> term_arithmetic_operation . INTEGER
+    (15) value -> term_arithmetic_operation . REAL
+
+    ID              shift and go to state 40
+    INTEGER         shift and go to state 39
+    REAL            shift and go to state 38
+
+
+state 15
+
+    (17) sign_arithmetic_operation -> PLUS .
+
+    ID              reduce using rule 17 (sign_arithmetic_operation -> PLUS .)
+    INTEGER         reduce using rule 17 (sign_arithmetic_operation -> PLUS .)
+    REAL            reduce using rule 17 (sign_arithmetic_operation -> PLUS .)
+    LEFTPARENTHESIS reduce using rule 17 (sign_arithmetic_operation -> PLUS .)
+    PLUS            reduce using rule 17 (sign_arithmetic_operation -> PLUS .)
+    MINUS           reduce using rule 17 (sign_arithmetic_operation -> PLUS .)
+    TIMES           reduce using rule 17 (sign_arithmetic_operation -> PLUS .)
+    DIVIDE          reduce using rule 17 (sign_arithmetic_operation -> PLUS .)
+
+
+state 16
+
+    (8) value -> sign_arithmetic_operation . ID
+    (11) value -> sign_arithmetic_operation . INTEGER
+    (14) value -> sign_arithmetic_operation . REAL
+
+    ID              shift and go to state 42
+    INTEGER         shift and go to state 43
+    REAL            shift and go to state 41
+
+
+state 17
+
+    (18) sign_arithmetic_operation -> MINUS .
+
+    ID              reduce using rule 18 (sign_arithmetic_operation -> MINUS .)
+    INTEGER         reduce using rule 18 (sign_arithmetic_operation -> MINUS .)
+    REAL            reduce using rule 18 (sign_arithmetic_operation -> MINUS .)
+    LEFTPARENTHESIS reduce using rule 18 (sign_arithmetic_operation -> MINUS .)
+    PLUS            reduce using rule 18 (sign_arithmetic_operation -> MINUS .)
+    MINUS           reduce using rule 18 (sign_arithmetic_operation -> MINUS .)
+    TIMES           reduce using rule 18 (sign_arithmetic_operation -> MINUS .)
+    DIVIDE          reduce using rule 18 (sign_arithmetic_operation -> MINUS .)
+
+
+state 18
+
+    (44) instruction -> while_start while_expression . while_body
+    (43) while_body -> . DO statements DONE DOT
+
+    DO              shift and go to state 44
+
+    while_body                     shift and go to state 45
+
+state 19
+
+    (16) value -> LEFTPARENTHESIS . expression RIGHTPARENTHESIS
+    (27) expression -> . expression relational_equality_operation comparison
+    (28) expression -> . comparison
+    (29) comparison -> . comparison relational_inequality_operation arithmetic_expression
+    (30) comparison -> . arithmetic_expression
+    (31) arithmetic_expression -> . arithmetic_expression sign_arithmetic_operation expression_term
+    (32) arithmetic_expression -> . expression_term
+    (33) expression_term -> . expression_term term_arithmetic_operation value
+    (34) expression_term -> . value
+    (7) value -> . ID
+    (8) value -> . sign_arithmetic_operation ID
+    (9) value -> . term_arithmetic_operation ID
+    (10) value -> . INTEGER
+    (11) value -> . sign_arithmetic_operation INTEGER
+    (12) value -> . term_arithmetic_operation INTEGER
+    (13) value -> . REAL
+    (14) value -> . sign_arithmetic_operation REAL
+    (15) value -> . term_arithmetic_operation REAL
+    (16) value -> . LEFTPARENTHESIS expression RIGHTPARENTHESIS
+    (17) sign_arithmetic_operation -> . PLUS
+    (18) sign_arithmetic_operation -> . MINUS
+    (19) term_arithmetic_operation -> . TIMES
+    (20) term_arithmetic_operation -> . DIVIDE
+
+    ID              shift and go to state 25
+    INTEGER         shift and go to state 21
+    REAL            shift and go to state 22
+    LEFTPARENTHESIS shift and go to state 19
+    PLUS            shift and go to state 15
+    MINUS           shift and go to state 17
+    TIMES           shift and go to state 20
+    DIVIDE          shift and go to state 11
+
+    arithmetic_expression          shift and go to state 10
+    comparison                     shift and go to state 13
+    expression_term                shift and go to state 12
+    sign_arithmetic_operation      shift and go to state 16
+    term_arithmetic_operation      shift and go to state 14
+    value                          shift and go to state 23
+    expression                     shift and go to state 46
+
+state 20
+
+    (19) term_arithmetic_operation -> TIMES .
+
+    ID              reduce using rule 19 (term_arithmetic_operation -> TIMES .)
+    INTEGER         reduce using rule 19 (term_arithmetic_operation -> TIMES .)
+    REAL            reduce using rule 19 (term_arithmetic_operation -> TIMES .)
+    LEFTPARENTHESIS reduce using rule 19 (term_arithmetic_operation -> TIMES .)
+    PLUS            reduce using rule 19 (term_arithmetic_operation -> TIMES .)
+    MINUS           reduce using rule 19 (term_arithmetic_operation -> TIMES .)
+    TIMES           reduce using rule 19 (term_arithmetic_operation -> TIMES .)
+    DIVIDE          reduce using rule 19 (term_arithmetic_operation -> TIMES .)
+
+
+state 21
+
+    (10) value -> INTEGER .
+
+    TIMES           reduce using rule 10 (value -> INTEGER .)
+    DIVIDE          reduce using rule 10 (value -> INTEGER .)
+    PLUS            reduce using rule 10 (value -> INTEGER .)
+    MINUS           reduce using rule 10 (value -> INTEGER .)
+    LOWEREQUAL      reduce using rule 10 (value -> INTEGER .)
+    GREATEREQUAL    reduce using rule 10 (value -> INTEGER .)
+    LOWERTHEN       reduce using rule 10 (value -> INTEGER .)
+    GREATERTHEN     reduce using rule 10 (value -> INTEGER .)
+    RIGHTPARENTHESIS reduce using rule 10 (value -> INTEGER .)
+    EQUAL           reduce using rule 10 (value -> INTEGER .)
+    NOTEQUAL        reduce using rule 10 (value -> INTEGER .)
+    DOT             reduce using rule 10 (value -> INTEGER .)
+    DO              reduce using rule 10 (value -> INTEGER .)
+    THEN            reduce using rule 10 (value -> INTEGER .)
+
+
+state 22
+
+    (13) value -> REAL .
+
+    TIMES           reduce using rule 13 (value -> REAL .)
+    DIVIDE          reduce using rule 13 (value -> REAL .)
+    PLUS            reduce using rule 13 (value -> REAL .)
+    MINUS           reduce using rule 13 (value -> REAL .)
+    LOWEREQUAL      reduce using rule 13 (value -> REAL .)
+    GREATEREQUAL    reduce using rule 13 (value -> REAL .)
+    LOWERTHEN       reduce using rule 13 (value -> REAL .)
+    GREATERTHEN     reduce using rule 13 (value -> REAL .)
+    RIGHTPARENTHESIS reduce using rule 13 (value -> REAL .)
+    EQUAL           reduce using rule 13 (value -> REAL .)
+    NOTEQUAL        reduce using rule 13 (value -> REAL .)
+    DOT             reduce using rule 13 (value -> REAL .)
+    DO              reduce using rule 13 (value -> REAL .)
+    THEN            reduce using rule 13 (value -> REAL .)
+
+
+state 23
+
+    (34) expression_term -> value .
+
+    TIMES           reduce using rule 34 (expression_term -> value .)
+    DIVIDE          reduce using rule 34 (expression_term -> value .)
+    PLUS            reduce using rule 34 (expression_term -> value .)
+    MINUS           reduce using rule 34 (expression_term -> value .)
+    LOWEREQUAL      reduce using rule 34 (expression_term -> value .)
+    GREATEREQUAL    reduce using rule 34 (expression_term -> value .)
+    LOWERTHEN       reduce using rule 34 (expression_term -> value .)
+    GREATERTHEN     reduce using rule 34 (expression_term -> value .)
+    DOT             reduce using rule 34 (expression_term -> value .)
+    EQUAL           reduce using rule 34 (expression_term -> value .)
+    NOTEQUAL        reduce using rule 34 (expression_term -> value .)
+    DO              reduce using rule 34 (expression_term -> value .)
+    THEN            reduce using rule 34 (expression_term -> value .)
+    RIGHTPARENTHESIS reduce using rule 34 (expression_term -> value .)
+
+
+state 24
+
+    (42) while_expression -> expression .
+    (27) expression -> expression . relational_equality_operation comparison
+    (21) relational_equality_operation -> . EQUAL
+    (22) relational_equality_operation -> . NOTEQUAL
+
+    DO              reduce using rule 42 (while_expression -> expression .)
+    EQUAL           shift and go to state 49
+    NOTEQUAL        shift and go to state 47
+
+    relational_equality_operation  shift and go to state 48
+
+state 25
+
+    (7) value -> ID .
+
+    TIMES           reduce using rule 7 (value -> ID .)
+    DIVIDE          reduce using rule 7 (value -> ID .)
+    PLUS            reduce using rule 7 (value -> ID .)
+    MINUS           reduce using rule 7 (value -> ID .)
+    LOWEREQUAL      reduce using rule 7 (value -> ID .)
+    GREATEREQUAL    reduce using rule 7 (value -> ID .)
+    LOWERTHEN       reduce using rule 7 (value -> ID .)
+    GREATERTHEN     reduce using rule 7 (value -> ID .)
+    RIGHTPARENTHESIS reduce using rule 7 (value -> ID .)
+    EQUAL           reduce using rule 7 (value -> ID .)
+    NOTEQUAL        reduce using rule 7 (value -> ID .)
+    DOT             reduce using rule 7 (value -> ID .)
+    DO              reduce using rule 7 (value -> ID .)
+    THEN            reduce using rule 7 (value -> ID .)
+
+
+state 26
+
+    (4) statements -> statements instruction .
+
+    END             reduce using rule 4 (statements -> statements instruction .)
+    PRINT           reduce using rule 4 (statements -> statements instruction .)
+    ID              reduce using rule 4 (statements -> statements instruction .)
+    IF              reduce using rule 4 (statements -> statements instruction .)
+    WHILE           reduce using rule 4 (statements -> statements instruction .)
+    DONE            reduce using rule 4 (statements -> statements instruction .)
+    $end            reduce using rule 4 (statements -> statements instruction .)
+
+
+state 27
+
+    (5) instruction -> PRINT expression . DOT
+    (27) expression -> expression . relational_equality_operation comparison
+    (21) relational_equality_operation -> . EQUAL
+    (22) relational_equality_operation -> . NOTEQUAL
+
+    DOT             shift and go to state 50
+    EQUAL           shift and go to state 49
+    NOTEQUAL        shift and go to state 47
+
+    relational_equality_operation  shift and go to state 48
+
+state 28
+
+    (39) instruction -> if_start if_expression . if_then_begin statements END DOT
+    (40) instruction -> if_start if_expression . if_then_begin statements END if_else_begin statements END DOT
+    (37) if_then_begin -> . THEN BEGIN
+
+    THEN            shift and go to state 51
+
+    if_then_begin                  shift and go to state 52
+
+state 29
+
+    (36) if_expression -> expression .
+    (27) expression -> expression . relational_equality_operation comparison
+    (21) relational_equality_operation -> . EQUAL
+    (22) relational_equality_operation -> . NOTEQUAL
+
+    THEN            reduce using rule 36 (if_expression -> expression .)
+    EQUAL           shift and go to state 49
+    NOTEQUAL        shift and go to state 47
+
+    relational_equality_operation  shift and go to state 48
+
+state 30
+
+    (6) instruction -> ID ASSIGN . expression DOT
+    (27) expression -> . expression relational_equality_operation comparison
+    (28) expression -> . comparison
+    (29) comparison -> . comparison relational_inequality_operation arithmetic_expression
+    (30) comparison -> . arithmetic_expression
+    (31) arithmetic_expression -> . arithmetic_expression sign_arithmetic_operation expression_term
+    (32) arithmetic_expression -> . expression_term
+    (33) expression_term -> . expression_term term_arithmetic_operation value
+    (34) expression_term -> . value
+    (7) value -> . ID
+    (8) value -> . sign_arithmetic_operation ID
+    (9) value -> . term_arithmetic_operation ID
+    (10) value -> . INTEGER
+    (11) value -> . sign_arithmetic_operation INTEGER
+    (12) value -> . term_arithmetic_operation INTEGER
+    (13) value -> . REAL
+    (14) value -> . sign_arithmetic_operation REAL
+    (15) value -> . term_arithmetic_operation REAL
+    (16) value -> . LEFTPARENTHESIS expression RIGHTPARENTHESIS
+    (17) sign_arithmetic_operation -> . PLUS
+    (18) sign_arithmetic_operation -> . MINUS
+    (19) term_arithmetic_operation -> . TIMES
+    (20) term_arithmetic_operation -> . DIVIDE
+
+    ID              shift and go to state 25
+    INTEGER         shift and go to state 21
+    REAL            shift and go to state 22
+    LEFTPARENTHESIS shift and go to state 19
+    PLUS            shift and go to state 15
+    MINUS           shift and go to state 17
+    TIMES           shift and go to state 20
+    DIVIDE          shift and go to state 11
+
+    arithmetic_expression          shift and go to state 10
+    comparison                     shift and go to state 13
+    expression_term                shift and go to state 12
+    sign_arithmetic_operation      shift and go to state 16
+    term_arithmetic_operation      shift and go to state 14
+    value                          shift and go to state 23
+    expression                     shift and go to state 53
+
+state 31
+
+    (31) arithmetic_expression -> arithmetic_expression sign_arithmetic_operation . expression_term
+    (33) expression_term -> . expression_term term_arithmetic_operation value
+    (34) expression_term -> . value
+    (7) value -> . ID
+    (8) value -> . sign_arithmetic_operation ID
+    (9) value -> . term_arithmetic_operation ID
+    (10) value -> . INTEGER
+    (11) value -> . sign_arithmetic_operation INTEGER
+    (12) value -> . term_arithmetic_operation INTEGER
+    (13) value -> . REAL
+    (14) value -> . sign_arithmetic_operation REAL
+    (15) value -> . term_arithmetic_operation REAL
+    (16) value -> . LEFTPARENTHESIS expression RIGHTPARENTHESIS
+    (17) sign_arithmetic_operation -> . PLUS
+    (18) sign_arithmetic_operation -> . MINUS
+    (19) term_arithmetic_operation -> . TIMES
+    (20) term_arithmetic_operation -> . DIVIDE
+
+    ID              shift and go to state 25
+    INTEGER         shift and go to state 21
+    REAL            shift and go to state 22
+    LEFTPARENTHESIS shift and go to state 19
+    PLUS            shift and go to state 15
+    MINUS           shift and go to state 17
+    TIMES           shift and go to state 20
+    DIVIDE          shift and go to state 11
+
+    sign_arithmetic_operation      shift and go to state 16
+    expression_term                shift and go to state 54
+    value                          shift and go to state 23
+    term_arithmetic_operation      shift and go to state 14
+
+state 32
+
+    (33) expression_term -> expression_term term_arithmetic_operation . value
+    (7) value -> . ID
+    (8) value -> . sign_arithmetic_operation ID
+    (9) value -> . term_arithmetic_operation ID
+    (10) value -> . INTEGER
+    (11) value -> . sign_arithmetic_operation INTEGER
+    (12) value -> . term_arithmetic_operation INTEGER
+    (13) value -> . REAL
+    (14) value -> . sign_arithmetic_operation REAL
+    (15) value -> . term_arithmetic_operation REAL
+    (16) value -> . LEFTPARENTHESIS expression RIGHTPARENTHESIS
+    (17) sign_arithmetic_operation -> . PLUS
+    (18) sign_arithmetic_operation -> . MINUS
+    (19) term_arithmetic_operation -> . TIMES
+    (20) term_arithmetic_operation -> . DIVIDE
+
+    ID              shift and go to state 25
+    INTEGER         shift and go to state 21
+    REAL            shift and go to state 22
+    LEFTPARENTHESIS shift and go to state 19
+    PLUS            shift and go to state 15
+    MINUS           shift and go to state 17
+    TIMES           shift and go to state 20
+    DIVIDE          shift and go to state 11
+
+    sign_arithmetic_operation      shift and go to state 16
+    value                          shift and go to state 55
+    term_arithmetic_operation      shift and go to state 14
+
+state 33
+
+    (29) comparison -> comparison relational_inequality_operation . arithmetic_expression
+    (31) arithmetic_expression -> . arithmetic_expression sign_arithmetic_operation expression_term
+    (32) arithmetic_expression -> . expression_term
+    (33) expression_term -> . expression_term term_arithmetic_operation value
+    (34) expression_term -> . value
+    (7) value -> . ID
+    (8) value -> . sign_arithmetic_operation ID
+    (9) value -> . term_arithmetic_operation ID
+    (10) value -> . INTEGER
+    (11) value -> . sign_arithmetic_operation INTEGER
+    (12) value -> . term_arithmetic_operation INTEGER
+    (13) value -> . REAL
+    (14) value -> . sign_arithmetic_operation REAL
+    (15) value -> . term_arithmetic_operation REAL
+    (16) value -> . LEFTPARENTHESIS expression RIGHTPARENTHESIS
+    (17) sign_arithmetic_operation -> . PLUS
+    (18) sign_arithmetic_operation -> . MINUS
+    (19) term_arithmetic_operation -> . TIMES
+    (20) term_arithmetic_operation -> . DIVIDE
+
+    ID              shift and go to state 25
+    INTEGER         shift and go to state 21
+    REAL            shift and go to state 22
+    LEFTPARENTHESIS shift and go to state 19
+    PLUS            shift and go to state 15
+    MINUS           shift and go to state 17
+    TIMES           shift and go to state 20
+    DIVIDE          shift and go to state 11
+
+    arithmetic_expression          shift and go to state 56
+    expression_term                shift and go to state 12
+    sign_arithmetic_operation      shift and go to state 16
+    term_arithmetic_operation      shift and go to state 14
+    value                          shift and go to state 23
+
+state 34
+
+    (25) relational_inequality_operation -> LOWERTHEN .
+
+    ID              reduce using rule 25 (relational_inequality_operation -> LOWERTHEN .)
+    INTEGER         reduce using rule 25 (relational_inequality_operation -> LOWERTHEN .)
+    REAL            reduce using rule 25 (relational_inequality_operation -> LOWERTHEN .)
+    LEFTPARENTHESIS reduce using rule 25 (relational_inequality_operation -> LOWERTHEN .)
+    PLUS            reduce using rule 25 (relational_inequality_operation -> LOWERTHEN .)
+    MINUS           reduce using rule 25 (relational_inequality_operation -> LOWERTHEN .)
+    TIMES           reduce using rule 25 (relational_inequality_operation -> LOWERTHEN .)
+    DIVIDE          reduce using rule 25 (relational_inequality_operation -> LOWERTHEN .)
+
+
+state 35
+
+    (24) relational_inequality_operation -> GREATEREQUAL .
+
+    ID              reduce using rule 24 (relational_inequality_operation -> GREATEREQUAL .)
+    INTEGER         reduce using rule 24 (relational_inequality_operation -> GREATEREQUAL .)
+    REAL            reduce using rule 24 (relational_inequality_operation -> GREATEREQUAL .)
+    LEFTPARENTHESIS reduce using rule 24 (relational_inequality_operation -> GREATEREQUAL .)
+    PLUS            reduce using rule 24 (relational_inequality_operation -> GREATEREQUAL .)
+    MINUS           reduce using rule 24 (relational_inequality_operation -> GREATEREQUAL .)
+    TIMES           reduce using rule 24 (relational_inequality_operation -> GREATEREQUAL .)
+    DIVIDE          reduce using rule 24 (relational_inequality_operation -> GREATEREQUAL .)
+
+
+state 36
+
+    (23) relational_inequality_operation -> LOWEREQUAL .
+
+    ID              reduce using rule 23 (relational_inequality_operation -> LOWEREQUAL .)
+    INTEGER         reduce using rule 23 (relational_inequality_operation -> LOWEREQUAL .)
+    REAL            reduce using rule 23 (relational_inequality_operation -> LOWEREQUAL .)
+    LEFTPARENTHESIS reduce using rule 23 (relational_inequality_operation -> LOWEREQUAL .)
+    PLUS            reduce using rule 23 (relational_inequality_operation -> LOWEREQUAL .)
+    MINUS           reduce using rule 23 (relational_inequality_operation -> LOWEREQUAL .)
+    TIMES           reduce using rule 23 (relational_inequality_operation -> LOWEREQUAL .)
+    DIVIDE          reduce using rule 23 (relational_inequality_operation -> LOWEREQUAL .)
+
+
+state 37
+
+    (26) relational_inequality_operation -> GREATERTHEN .
+
+    ID              reduce using rule 26 (relational_inequality_operation -> GREATERTHEN .)
+    INTEGER         reduce using rule 26 (relational_inequality_operation -> GREATERTHEN .)
+    REAL            reduce using rule 26 (relational_inequality_operation -> GREATERTHEN .)
+    LEFTPARENTHESIS reduce using rule 26 (relational_inequality_operation -> GREATERTHEN .)
+    PLUS            reduce using rule 26 (relational_inequality_operation -> GREATERTHEN .)
+    MINUS           reduce using rule 26 (relational_inequality_operation -> GREATERTHEN .)
+    TIMES           reduce using rule 26 (relational_inequality_operation -> GREATERTHEN .)
+    DIVIDE          reduce using rule 26 (relational_inequality_operation -> GREATERTHEN .)
+
+
+state 38
+
+    (15) value -> term_arithmetic_operation REAL .
+
+    TIMES           reduce using rule 15 (value -> term_arithmetic_operation REAL .)
+    DIVIDE          reduce using rule 15 (value -> term_arithmetic_operation REAL .)
+    PLUS            reduce using rule 15 (value -> term_arithmetic_operation REAL .)
+    MINUS           reduce using rule 15 (value -> term_arithmetic_operation REAL .)
+    LOWEREQUAL      reduce using rule 15 (value -> term_arithmetic_operation REAL .)
+    GREATEREQUAL    reduce using rule 15 (value -> term_arithmetic_operation REAL .)
+    LOWERTHEN       reduce using rule 15 (value -> term_arithmetic_operation REAL .)
+    GREATERTHEN     reduce using rule 15 (value -> term_arithmetic_operation REAL .)
+    RIGHTPARENTHESIS reduce using rule 15 (value -> term_arithmetic_operation REAL .)
+    EQUAL           reduce using rule 15 (value -> term_arithmetic_operation REAL .)
+    NOTEQUAL        reduce using rule 15 (value -> term_arithmetic_operation REAL .)
+    DOT             reduce using rule 15 (value -> term_arithmetic_operation REAL .)
+    DO              reduce using rule 15 (value -> term_arithmetic_operation REAL .)
+    THEN            reduce using rule 15 (value -> term_arithmetic_operation REAL .)
+
+
+state 39
+
+    (12) value -> term_arithmetic_operation INTEGER .
+
+    TIMES           reduce using rule 12 (value -> term_arithmetic_operation INTEGER .)
+    DIVIDE          reduce using rule 12 (value -> term_arithmetic_operation INTEGER .)
+    PLUS            reduce using rule 12 (value -> term_arithmetic_operation INTEGER .)
+    MINUS           reduce using rule 12 (value -> term_arithmetic_operation INTEGER .)
+    LOWEREQUAL      reduce using rule 12 (value -> term_arithmetic_operation INTEGER .)
+    GREATEREQUAL    reduce using rule 12 (value -> term_arithmetic_operation INTEGER .)
+    LOWERTHEN       reduce using rule 12 (value -> term_arithmetic_operation INTEGER .)
+    GREATERTHEN     reduce using rule 12 (value -> term_arithmetic_operation INTEGER .)
+    RIGHTPARENTHESIS reduce using rule 12 (value -> term_arithmetic_operation INTEGER .)
+    EQUAL           reduce using rule 12 (value -> term_arithmetic_operation INTEGER .)
+    NOTEQUAL        reduce using rule 12 (value -> term_arithmetic_operation INTEGER .)
+    DOT             reduce using rule 12 (value -> term_arithmetic_operation INTEGER .)
+    DO              reduce using rule 12 (value -> term_arithmetic_operation INTEGER .)
+    THEN            reduce using rule 12 (value -> term_arithmetic_operation INTEGER .)
+
+
+state 40
+
+    (9) value -> term_arithmetic_operation ID .
+
+    TIMES           reduce using rule 9 (value -> term_arithmetic_operation ID .)
+    DIVIDE          reduce using rule 9 (value -> term_arithmetic_operation ID .)
+    PLUS            reduce using rule 9 (value -> term_arithmetic_operation ID .)
+    MINUS           reduce using rule 9 (value -> term_arithmetic_operation ID .)
+    LOWEREQUAL      reduce using rule 9 (value -> term_arithmetic_operation ID .)
+    GREATEREQUAL    reduce using rule 9 (value -> term_arithmetic_operation ID .)
+    LOWERTHEN       reduce using rule 9 (value -> term_arithmetic_operation ID .)
+    GREATERTHEN     reduce using rule 9 (value -> term_arithmetic_operation ID .)
+    RIGHTPARENTHESIS reduce using rule 9 (value -> term_arithmetic_operation ID .)
+    EQUAL           reduce using rule 9 (value -> term_arithmetic_operation ID .)
+    NOTEQUAL        reduce using rule 9 (value -> term_arithmetic_operation ID .)
+    DOT             reduce using rule 9 (value -> term_arithmetic_operation ID .)
+    DO              reduce using rule 9 (value -> term_arithmetic_operation ID .)
+    THEN            reduce using rule 9 (value -> term_arithmetic_operation ID .)
+
+
+state 41
+
+    (14) value -> sign_arithmetic_operation REAL .
+
+    TIMES           reduce using rule 14 (value -> sign_arithmetic_operation REAL .)
+    DIVIDE          reduce using rule 14 (value -> sign_arithmetic_operation REAL .)
+    PLUS            reduce using rule 14 (value -> sign_arithmetic_operation REAL .)
+    MINUS           reduce using rule 14 (value -> sign_arithmetic_operation REAL .)
+    LOWEREQUAL      reduce using rule 14 (value -> sign_arithmetic_operation REAL .)
+    GREATEREQUAL    reduce using rule 14 (value -> sign_arithmetic_operation REAL .)
+    LOWERTHEN       reduce using rule 14 (value -> sign_arithmetic_operation REAL .)
+    GREATERTHEN     reduce using rule 14 (value -> sign_arithmetic_operation REAL .)
+    RIGHTPARENTHESIS reduce using rule 14 (value -> sign_arithmetic_operation REAL .)
+    EQUAL           reduce using rule 14 (value -> sign_arithmetic_operation REAL .)
+    NOTEQUAL        reduce using rule 14 (value -> sign_arithmetic_operation REAL .)
+    DOT             reduce using rule 14 (value -> sign_arithmetic_operation REAL .)
+    DO              reduce using rule 14 (value -> sign_arithmetic_operation REAL .)
+    THEN            reduce using rule 14 (value -> sign_arithmetic_operation REAL .)
+
+
+state 42
+
+    (8) value -> sign_arithmetic_operation ID .
+
+    TIMES           reduce using rule 8 (value -> sign_arithmetic_operation ID .)
+    DIVIDE          reduce using rule 8 (value -> sign_arithmetic_operation ID .)
+    PLUS            reduce using rule 8 (value -> sign_arithmetic_operation ID .)
+    MINUS           reduce using rule 8 (value -> sign_arithmetic_operation ID .)
+    LOWEREQUAL      reduce using rule 8 (value -> sign_arithmetic_operation ID .)
+    GREATEREQUAL    reduce using rule 8 (value -> sign_arithmetic_operation ID .)
+    LOWERTHEN       reduce using rule 8 (value -> sign_arithmetic_operation ID .)
+    GREATERTHEN     reduce using rule 8 (value -> sign_arithmetic_operation ID .)
+    RIGHTPARENTHESIS reduce using rule 8 (value -> sign_arithmetic_operation ID .)
+    EQUAL           reduce using rule 8 (value -> sign_arithmetic_operation ID .)
+    NOTEQUAL        reduce using rule 8 (value -> sign_arithmetic_operation ID .)
+    DOT             reduce using rule 8 (value -> sign_arithmetic_operation ID .)
+    DO              reduce using rule 8 (value -> sign_arithmetic_operation ID .)
+    THEN            reduce using rule 8 (value -> sign_arithmetic_operation ID .)
+
+
+state 43
+
+    (11) value -> sign_arithmetic_operation INTEGER .
+
+    TIMES           reduce using rule 11 (value -> sign_arithmetic_operation INTEGER .)
+    DIVIDE          reduce using rule 11 (value -> sign_arithmetic_operation INTEGER .)
+    PLUS            reduce using rule 11 (value -> sign_arithmetic_operation INTEGER .)
+    MINUS           reduce using rule 11 (value -> sign_arithmetic_operation INTEGER .)
+    LOWEREQUAL      reduce using rule 11 (value -> sign_arithmetic_operation INTEGER .)
+    GREATEREQUAL    reduce using rule 11 (value -> sign_arithmetic_operation INTEGER .)
+    LOWERTHEN       reduce using rule 11 (value -> sign_arithmetic_operation INTEGER .)
+    GREATERTHEN     reduce using rule 11 (value -> sign_arithmetic_operation INTEGER .)
+    RIGHTPARENTHESIS reduce using rule 11 (value -> sign_arithmetic_operation INTEGER .)
+    EQUAL           reduce using rule 11 (value -> sign_arithmetic_operation INTEGER .)
+    NOTEQUAL        reduce using rule 11 (value -> sign_arithmetic_operation INTEGER .)
+    DOT             reduce using rule 11 (value -> sign_arithmetic_operation INTEGER .)
+    DO              reduce using rule 11 (value -> sign_arithmetic_operation INTEGER .)
+    THEN            reduce using rule 11 (value -> sign_arithmetic_operation INTEGER .)
+
+
+state 44
+
+    (43) while_body -> DO . statements DONE DOT
+    (3) statements -> . instruction
+    (4) statements -> . statements instruction
+    (5) instruction -> . PRINT expression DOT
+    (6) instruction -> . ID ASSIGN expression DOT
+    (39) instruction -> . if_start if_expression if_then_begin statements END DOT
+    (40) instruction -> . if_start if_expression if_then_begin statements END if_else_begin statements END DOT
+    (44) instruction -> . while_start while_expression while_body
+    (35) if_start -> . IF
+    (41) while_start -> . WHILE
+
+    PRINT           shift and go to state 6
+    ID              shift and go to state 8
+    IF              shift and go to state 9
+    WHILE           shift and go to state 4
+
+    while_start                    shift and go to state 1
+    statements                     shift and go to state 57
+    instruction                    shift and go to state 3
+    if_start                       shift and go to state 7
+
+state 45
+
+    (44) instruction -> while_start while_expression while_body .
+
+    PRINT           reduce using rule 44 (instruction -> while_start while_expression while_body .)
+    ID              reduce using rule 44 (instruction -> while_start while_expression while_body .)
+    IF              reduce using rule 44 (instruction -> while_start while_expression while_body .)
+    WHILE           reduce using rule 44 (instruction -> while_start while_expression while_body .)
+    $end            reduce using rule 44 (instruction -> while_start while_expression while_body .)
+    END             reduce using rule 44 (instruction -> while_start while_expression while_body .)
+    DONE            reduce using rule 44 (instruction -> while_start while_expression while_body .)
+
+
+state 46
+
+    (16) value -> LEFTPARENTHESIS expression . RIGHTPARENTHESIS
+    (27) expression -> expression . relational_equality_operation comparison
+    (21) relational_equality_operation -> . EQUAL
+    (22) relational_equality_operation -> . NOTEQUAL
+
+    RIGHTPARENTHESIS shift and go to state 58
+    EQUAL           shift and go to state 49
+    NOTEQUAL        shift and go to state 47
+
+    relational_equality_operation  shift and go to state 48
+
+state 47
+
+    (22) relational_equality_operation -> NOTEQUAL .
+
+    ID              reduce using rule 22 (relational_equality_operation -> NOTEQUAL .)
+    INTEGER         reduce using rule 22 (relational_equality_operation -> NOTEQUAL .)
+    REAL            reduce using rule 22 (relational_equality_operation -> NOTEQUAL .)
+    LEFTPARENTHESIS reduce using rule 22 (relational_equality_operation -> NOTEQUAL .)
+    PLUS            reduce using rule 22 (relational_equality_operation -> NOTEQUAL .)
+    MINUS           reduce using rule 22 (relational_equality_operation -> NOTEQUAL .)
+    TIMES           reduce using rule 22 (relational_equality_operation -> NOTEQUAL .)
+    DIVIDE          reduce using rule 22 (relational_equality_operation -> NOTEQUAL .)
+
+
+state 48
+
+    (27) expression -> expression relational_equality_operation . comparison
+    (29) comparison -> . comparison relational_inequality_operation arithmetic_expression
+    (30) comparison -> . arithmetic_expression
+    (31) arithmetic_expression -> . arithmetic_expression sign_arithmetic_operation expression_term
+    (32) arithmetic_expression -> . expression_term
+    (33) expression_term -> . expression_term term_arithmetic_operation value
+    (34) expression_term -> . value
+    (7) value -> . ID
+    (8) value -> . sign_arithmetic_operation ID
+    (9) value -> . term_arithmetic_operation ID
+    (10) value -> . INTEGER
+    (11) value -> . sign_arithmetic_operation INTEGER
+    (12) value -> . term_arithmetic_operation INTEGER
+    (13) value -> . REAL
+    (14) value -> . sign_arithmetic_operation REAL
+    (15) value -> . term_arithmetic_operation REAL
+    (16) value -> . LEFTPARENTHESIS expression RIGHTPARENTHESIS
+    (17) sign_arithmetic_operation -> . PLUS
+    (18) sign_arithmetic_operation -> . MINUS
+    (19) term_arithmetic_operation -> . TIMES
+    (20) term_arithmetic_operation -> . DIVIDE
+
+    ID              shift and go to state 25
+    INTEGER         shift and go to state 21
+    REAL            shift and go to state 22
+    LEFTPARENTHESIS shift and go to state 19
+    PLUS            shift and go to state 15
+    MINUS           shift and go to state 17
+    TIMES           shift and go to state 20
+    DIVIDE          shift and go to state 11
+
+    arithmetic_expression          shift and go to state 10
+    comparison                     shift and go to state 59
+    expression_term                shift and go to state 12
+    sign_arithmetic_operation      shift and go to state 16
+    term_arithmetic_operation      shift and go to state 14
+    value                          shift and go to state 23
+
+state 49
+
+    (21) relational_equality_operation -> EQUAL .
+
+    ID              reduce using rule 21 (relational_equality_operation -> EQUAL .)
+    INTEGER         reduce using rule 21 (relational_equality_operation -> EQUAL .)
+    REAL            reduce using rule 21 (relational_equality_operation -> EQUAL .)
+    LEFTPARENTHESIS reduce using rule 21 (relational_equality_operation -> EQUAL .)
+    PLUS            reduce using rule 21 (relational_equality_operation -> EQUAL .)
+    MINUS           reduce using rule 21 (relational_equality_operation -> EQUAL .)
+    TIMES           reduce using rule 21 (relational_equality_operation -> EQUAL .)
+    DIVIDE          reduce using rule 21 (relational_equality_operation -> EQUAL .)
+
+
+state 50
+
+    (5) instruction -> PRINT expression DOT .
+
+    PRINT           reduce using rule 5 (instruction -> PRINT expression DOT .)
+    ID              reduce using rule 5 (instruction -> PRINT expression DOT .)
+    IF              reduce using rule 5 (instruction -> PRINT expression DOT .)
+    WHILE           reduce using rule 5 (instruction -> PRINT expression DOT .)
+    $end            reduce using rule 5 (instruction -> PRINT expression DOT .)
+    END             reduce using rule 5 (instruction -> PRINT expression DOT .)
+    DONE            reduce using rule 5 (instruction -> PRINT expression DOT .)
+
+
+state 51
+
+    (37) if_then_begin -> THEN . BEGIN
+
+    BEGIN           shift and go to state 60
+
+
+state 52
+
+    (39) instruction -> if_start if_expression if_then_begin . statements END DOT
+    (40) instruction -> if_start if_expression if_then_begin . statements END if_else_begin statements END DOT
+    (3) statements -> . instruction
+    (4) statements -> . statements instruction
+    (5) instruction -> . PRINT expression DOT
+    (6) instruction -> . ID ASSIGN expression DOT
+    (39) instruction -> . if_start if_expression if_then_begin statements END DOT
+    (40) instruction -> . if_start if_expression if_then_begin statements END if_else_begin statements END DOT
+    (44) instruction -> . while_start while_expression while_body
+    (35) if_start -> . IF
+    (41) while_start -> . WHILE
+
+    PRINT           shift and go to state 6
+    ID              shift and go to state 8
+    IF              shift and go to state 9
+    WHILE           shift and go to state 4
+
+    while_start                    shift and go to state 1
+    statements                     shift and go to state 61
+    instruction                    shift and go to state 3
+    if_start                       shift and go to state 7
+
+state 53
+
+    (6) instruction -> ID ASSIGN expression . DOT
+    (27) expression -> expression . relational_equality_operation comparison
+    (21) relational_equality_operation -> . EQUAL
+    (22) relational_equality_operation -> . NOTEQUAL
+
+    DOT             shift and go to state 62
+    EQUAL           shift and go to state 49
+    NOTEQUAL        shift and go to state 47
+
+    relational_equality_operation  shift and go to state 48
+
+state 54
+
+    (31) arithmetic_expression -> arithmetic_expression sign_arithmetic_operation expression_term .
+    (33) expression_term -> expression_term . term_arithmetic_operation value
+    (19) term_arithmetic_operation -> . TIMES
+    (20) term_arithmetic_operation -> . DIVIDE
+
+    PLUS            reduce using rule 31 (arithmetic_expression -> arithmetic_expression sign_arithmetic_operation expression_term .)
+    MINUS           reduce using rule 31 (arithmetic_expression -> arithmetic_expression sign_arithmetic_operation expression_term .)
+    LOWEREQUAL      reduce using rule 31 (arithmetic_expression -> arithmetic_expression sign_arithmetic_operation expression_term .)
+    GREATEREQUAL    reduce using rule 31 (arithmetic_expression -> arithmetic_expression sign_arithmetic_operation expression_term .)
+    LOWERTHEN       reduce using rule 31 (arithmetic_expression -> arithmetic_expression sign_arithmetic_operation expression_term .)
+    GREATERTHEN     reduce using rule 31 (arithmetic_expression -> arithmetic_expression sign_arithmetic_operation expression_term .)
+    EQUAL           reduce using rule 31 (arithmetic_expression -> arithmetic_expression sign_arithmetic_operation expression_term .)
+    NOTEQUAL        reduce using rule 31 (arithmetic_expression -> arithmetic_expression sign_arithmetic_operation expression_term .)
+    DO              reduce using rule 31 (arithmetic_expression -> arithmetic_expression sign_arithmetic_operation expression_term .)
+    DOT             reduce using rule 31 (arithmetic_expression -> arithmetic_expression sign_arithmetic_operation expression_term .)
+    THEN            reduce using rule 31 (arithmetic_expression -> arithmetic_expression sign_arithmetic_operation expression_term .)
+    RIGHTPARENTHESIS reduce using rule 31 (arithmetic_expression -> arithmetic_expression sign_arithmetic_operation expression_term .)
+    TIMES           shift and go to state 20
+    DIVIDE          shift and go to state 11
+
+    term_arithmetic_operation      shift and go to state 32
+
+state 55
+
+    (33) expression_term -> expression_term term_arithmetic_operation value .
+
+    TIMES           reduce using rule 33 (expression_term -> expression_term term_arithmetic_operation value .)
+    DIVIDE          reduce using rule 33 (expression_term -> expression_term term_arithmetic_operation value .)
+    PLUS            reduce using rule 33 (expression_term -> expression_term term_arithmetic_operation value .)
+    MINUS           reduce using rule 33 (expression_term -> expression_term term_arithmetic_operation value .)
+    LOWEREQUAL      reduce using rule 33 (expression_term -> expression_term term_arithmetic_operation value .)
+    GREATEREQUAL    reduce using rule 33 (expression_term -> expression_term term_arithmetic_operation value .)
+    LOWERTHEN       reduce using rule 33 (expression_term -> expression_term term_arithmetic_operation value .)
+    GREATERTHEN     reduce using rule 33 (expression_term -> expression_term term_arithmetic_operation value .)
+    DOT             reduce using rule 33 (expression_term -> expression_term term_arithmetic_operation value .)
+    EQUAL           reduce using rule 33 (expression_term -> expression_term term_arithmetic_operation value .)
+    NOTEQUAL        reduce using rule 33 (expression_term -> expression_term term_arithmetic_operation value .)
+    DO              reduce using rule 33 (expression_term -> expression_term term_arithmetic_operation value .)
+    THEN            reduce using rule 33 (expression_term -> expression_term term_arithmetic_operation value .)
+    RIGHTPARENTHESIS reduce using rule 33 (expression_term -> expression_term term_arithmetic_operation value .)
+
+
+state 56
+
+    (29) comparison -> comparison relational_inequality_operation arithmetic_expression .
+    (31) arithmetic_expression -> arithmetic_expression . sign_arithmetic_operation expression_term
+    (17) sign_arithmetic_operation -> . PLUS
+    (18) sign_arithmetic_operation -> . MINUS
+
+    LOWEREQUAL      reduce using rule 29 (comparison -> comparison relational_inequality_operation arithmetic_expression .)
+    GREATEREQUAL    reduce using rule 29 (comparison -> comparison relational_inequality_operation arithmetic_expression .)
+    LOWERTHEN       reduce using rule 29 (comparison -> comparison relational_inequality_operation arithmetic_expression .)
+    GREATERTHEN     reduce using rule 29 (comparison -> comparison relational_inequality_operation arithmetic_expression .)
+    RIGHTPARENTHESIS reduce using rule 29 (comparison -> comparison relational_inequality_operation arithmetic_expression .)
+    EQUAL           reduce using rule 29 (comparison -> comparison relational_inequality_operation arithmetic_expression .)
+    NOTEQUAL        reduce using rule 29 (comparison -> comparison relational_inequality_operation arithmetic_expression .)
+    DO              reduce using rule 29 (comparison -> comparison relational_inequality_operation arithmetic_expression .)
+    THEN            reduce using rule 29 (comparison -> comparison relational_inequality_operation arithmetic_expression .)
+    DOT             reduce using rule 29 (comparison -> comparison relational_inequality_operation arithmetic_expression .)
+    PLUS            shift and go to state 15
+    MINUS           shift and go to state 17
+
+    sign_arithmetic_operation      shift and go to state 31
+
+state 57
+
+    (43) while_body -> DO statements . DONE DOT
+    (4) statements -> statements . instruction
+    (5) instruction -> . PRINT expression DOT
+    (6) instruction -> . ID ASSIGN expression DOT
+    (39) instruction -> . if_start if_expression if_then_begin statements END DOT
+    (40) instruction -> . if_start if_expression if_then_begin statements END if_else_begin statements END DOT
+    (44) instruction -> . while_start while_expression while_body
+    (35) if_start -> . IF
+    (41) while_start -> . WHILE
+
+    DONE            shift and go to state 63
+    PRINT           shift and go to state 6
+    ID              shift and go to state 8
+    IF              shift and go to state 9
+    WHILE           shift and go to state 4
+
+    while_start                    shift and go to state 1
+    instruction                    shift and go to state 26
+    if_start                       shift and go to state 7
+
+state 58
+
+    (16) value -> LEFTPARENTHESIS expression RIGHTPARENTHESIS .
+
+    TIMES           reduce using rule 16 (value -> LEFTPARENTHESIS expression RIGHTPARENTHESIS .)
+    DIVIDE          reduce using rule 16 (value -> LEFTPARENTHESIS expression RIGHTPARENTHESIS .)
+    PLUS            reduce using rule 16 (value -> LEFTPARENTHESIS expression RIGHTPARENTHESIS .)
+    MINUS           reduce using rule 16 (value -> LEFTPARENTHESIS expression RIGHTPARENTHESIS .)
+    LOWEREQUAL      reduce using rule 16 (value -> LEFTPARENTHESIS expression RIGHTPARENTHESIS .)
+    GREATEREQUAL    reduce using rule 16 (value -> LEFTPARENTHESIS expression RIGHTPARENTHESIS .)
+    LOWERTHEN       reduce using rule 16 (value -> LEFTPARENTHESIS expression RIGHTPARENTHESIS .)
+    GREATERTHEN     reduce using rule 16 (value -> LEFTPARENTHESIS expression RIGHTPARENTHESIS .)
+    RIGHTPARENTHESIS reduce using rule 16 (value -> LEFTPARENTHESIS expression RIGHTPARENTHESIS .)
+    EQUAL           reduce using rule 16 (value -> LEFTPARENTHESIS expression RIGHTPARENTHESIS .)
+    NOTEQUAL        reduce using rule 16 (value -> LEFTPARENTHESIS expression RIGHTPARENTHESIS .)
+    DOT             reduce using rule 16 (value -> LEFTPARENTHESIS expression RIGHTPARENTHESIS .)
+    DO              reduce using rule 16 (value -> LEFTPARENTHESIS expression RIGHTPARENTHESIS .)
+    THEN            reduce using rule 16 (value -> LEFTPARENTHESIS expression RIGHTPARENTHESIS .)
+
+
+state 59
+
+    (27) expression -> expression relational_equality_operation comparison .
+    (29) comparison -> comparison . relational_inequality_operation arithmetic_expression
+    (23) relational_inequality_operation -> . LOWEREQUAL
+    (24) relational_inequality_operation -> . GREATEREQUAL
+    (25) relational_inequality_operation -> . LOWERTHEN
+    (26) relational_inequality_operation -> . GREATERTHEN
+
+    RIGHTPARENTHESIS reduce using rule 27 (expression -> expression relational_equality_operation comparison .)
+    EQUAL           reduce using rule 27 (expression -> expression relational_equality_operation comparison .)
+    NOTEQUAL        reduce using rule 27 (expression -> expression relational_equality_operation comparison .)
+    THEN            reduce using rule 27 (expression -> expression relational_equality_operation comparison .)
+    DOT             reduce using rule 27 (expression -> expression relational_equality_operation comparison .)
+    DO              reduce using rule 27 (expression -> expression relational_equality_operation comparison .)
+    LOWEREQUAL      shift and go to state 36
+    GREATEREQUAL    shift and go to state 35
+    LOWERTHEN       shift and go to state 34
+    GREATERTHEN     shift and go to state 37
+
+    relational_inequality_operation shift and go to state 33
+
+state 60
+
+    (37) if_then_begin -> THEN BEGIN .
+
+    PRINT           reduce using rule 37 (if_then_begin -> THEN BEGIN .)
+    ID              reduce using rule 37 (if_then_begin -> THEN BEGIN .)
+    IF              reduce using rule 37 (if_then_begin -> THEN BEGIN .)
+    WHILE           reduce using rule 37 (if_then_begin -> THEN BEGIN .)
+
+
+state 61
+
+    (39) instruction -> if_start if_expression if_then_begin statements . END DOT
+    (40) instruction -> if_start if_expression if_then_begin statements . END if_else_begin statements END DOT
+    (4) statements -> statements . instruction
+    (5) instruction -> . PRINT expression DOT
+    (6) instruction -> . ID ASSIGN expression DOT
+    (39) instruction -> . if_start if_expression if_then_begin statements END DOT
+    (40) instruction -> . if_start if_expression if_then_begin statements END if_else_begin statements END DOT
+    (44) instruction -> . while_start while_expression while_body
+    (35) if_start -> . IF
+    (41) while_start -> . WHILE
+
+    END             shift and go to state 64
+    PRINT           shift and go to state 6
+    ID              shift and go to state 8
+    IF              shift and go to state 9
+    WHILE           shift and go to state 4
+
+    while_start                    shift and go to state 1
+    instruction                    shift and go to state 26
+    if_start                       shift and go to state 7
+
+state 62
+
+    (6) instruction -> ID ASSIGN expression DOT .
+
+    PRINT           reduce using rule 6 (instruction -> ID ASSIGN expression DOT .)
+    ID              reduce using rule 6 (instruction -> ID ASSIGN expression DOT .)
+    IF              reduce using rule 6 (instruction -> ID ASSIGN expression DOT .)
+    WHILE           reduce using rule 6 (instruction -> ID ASSIGN expression DOT .)
+    $end            reduce using rule 6 (instruction -> ID ASSIGN expression DOT .)
+    END             reduce using rule 6 (instruction -> ID ASSIGN expression DOT .)
+    DONE            reduce using rule 6 (instruction -> ID ASSIGN expression DOT .)
+
+
+state 63
+
+    (43) while_body -> DO statements DONE . DOT
+
+    DOT             shift and go to state 65
+
+
+state 64
+
+    (39) instruction -> if_start if_expression if_then_begin statements END . DOT
+    (40) instruction -> if_start if_expression if_then_begin statements END . if_else_begin statements END DOT
+    (38) if_else_begin -> . ELSE BEGIN
+
+    DOT             shift and go to state 68
+    ELSE            shift and go to state 66
+
+    if_else_begin                  shift and go to state 67
+
+state 65
+
+    (43) while_body -> DO statements DONE DOT .
+
+    PRINT           reduce using rule 43 (while_body -> DO statements DONE DOT .)
+    ID              reduce using rule 43 (while_body -> DO statements DONE DOT .)
+    IF              reduce using rule 43 (while_body -> DO statements DONE DOT .)
+    WHILE           reduce using rule 43 (while_body -> DO statements DONE DOT .)
+    $end            reduce using rule 43 (while_body -> DO statements DONE DOT .)
+    DONE            reduce using rule 43 (while_body -> DO statements DONE DOT .)
+    END             reduce using rule 43 (while_body -> DO statements DONE DOT .)
+
+
+state 66
+
+    (38) if_else_begin -> ELSE . BEGIN
+
+    BEGIN           shift and go to state 69
+
+
+state 67
+
+    (40) instruction -> if_start if_expression if_then_begin statements END if_else_begin . statements END DOT
+    (3) statements -> . instruction
+    (4) statements -> . statements instruction
+    (5) instruction -> . PRINT expression DOT
+    (6) instruction -> . ID ASSIGN expression DOT
+    (39) instruction -> . if_start if_expression if_then_begin statements END DOT
+    (40) instruction -> . if_start if_expression if_then_begin statements END if_else_begin statements END DOT
+    (44) instruction -> . while_start while_expression while_body
+    (35) if_start -> . IF
+    (41) while_start -> . WHILE
+
+    PRINT           shift and go to state 6
+    ID              shift and go to state 8
+    IF              shift and go to state 9
+    WHILE           shift and go to state 4
+
+    while_start                    shift and go to state 1
+    statements                     shift and go to state 70
+    instruction                    shift and go to state 3
+    if_start                       shift and go to state 7
+
+state 68
+
+    (39) instruction -> if_start if_expression if_then_begin statements END DOT .
+
+    PRINT           reduce using rule 39 (instruction -> if_start if_expression if_then_begin statements END DOT .)
+    ID              reduce using rule 39 (instruction -> if_start if_expression if_then_begin statements END DOT .)
+    IF              reduce using rule 39 (instruction -> if_start if_expression if_then_begin statements END DOT .)
+    WHILE           reduce using rule 39 (instruction -> if_start if_expression if_then_begin statements END DOT .)
+    $end            reduce using rule 39 (instruction -> if_start if_expression if_then_begin statements END DOT .)
+    END             reduce using rule 39 (instruction -> if_start if_expression if_then_begin statements END DOT .)
+    DONE            reduce using rule 39 (instruction -> if_start if_expression if_then_begin statements END DOT .)
+
+
+state 69
+
+    (38) if_else_begin -> ELSE BEGIN .
+
+    PRINT           reduce using rule 38 (if_else_begin -> ELSE BEGIN .)
+    ID              reduce using rule 38 (if_else_begin -> ELSE BEGIN .)
+    IF              reduce using rule 38 (if_else_begin -> ELSE BEGIN .)
+    WHILE           reduce using rule 38 (if_else_begin -> ELSE BEGIN .)
+
+
+state 70
+
+    (40) instruction -> if_start if_expression if_then_begin statements END if_else_begin statements . END DOT
+    (4) statements -> statements . instruction
+    (5) instruction -> . PRINT expression DOT
+    (6) instruction -> . ID ASSIGN expression DOT
+    (39) instruction -> . if_start if_expression if_then_begin statements END DOT
+    (40) instruction -> . if_start if_expression if_then_begin statements END if_else_begin statements END DOT
+    (44) instruction -> . while_start while_expression while_body
+    (35) if_start -> . IF
+    (41) while_start -> . WHILE
+
+    END             shift and go to state 71
+    PRINT           shift and go to state 6
+    ID              shift and go to state 8
+    IF              shift and go to state 9
+    WHILE           shift and go to state 4
+
+    while_start                    shift and go to state 1
+    instruction                    shift and go to state 26
+    if_start                       shift and go to state 7
+
+state 71
+
+    (40) instruction -> if_start if_expression if_then_begin statements END if_else_begin statements END . DOT
+
+    DOT             shift and go to state 72
+
+
+state 72
+
+    (40) instruction -> if_start if_expression if_then_begin statements END if_else_begin statements END DOT .
+
+    PRINT           reduce using rule 40 (instruction -> if_start if_expression if_then_begin statements END if_else_begin statements END DOT .)
+    ID              reduce using rule 40 (instruction -> if_start if_expression if_then_begin statements END if_else_begin statements END DOT .)
+    IF              reduce using rule 40 (instruction -> if_start if_expression if_then_begin statements END if_else_begin statements END DOT .)
+    WHILE           reduce using rule 40 (instruction -> if_start if_expression if_then_begin statements END if_else_begin statements END DOT .)
+    $end            reduce using rule 40 (instruction -> if_start if_expression if_then_begin statements END if_else_begin statements END DOT .)
+    END             reduce using rule 40 (instruction -> if_start if_expression if_then_begin statements END if_else_begin statements END DOT .)
+    DONE            reduce using rule 40 (instruction -> if_start if_expression if_then_begin statements END if_else_begin statements END DOT .)
+
