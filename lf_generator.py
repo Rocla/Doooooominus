@@ -18,7 +18,6 @@ class LF_Generator:
         #Travel the tree and generate code
         nodes = [self.ast.get_root()]
         while len(nodes) != 0:
-            #start a new node, a new line
             node = nodes.pop(len(nodes) - 1)
 
             #indent the code
@@ -26,40 +25,48 @@ class LF_Generator:
                 c.append("\t")
 
             if isinstance(node, Print_Node):
-                print "mhhhh, fill my with good stuff"
-                
+                c.append("print ")
+
             elif isinstance(node, Number_Node):
-                print "mhhhh, fill my with good stuff"
+                c.append(str(node.value))
 
             elif isinstance(node, Operation_Node):
-                print "mhhhh, fill my with good stuff"
+                c.append(str(node.operation))
 
             elif isinstance(node, While_Node):
-                print "mhhhh, fill my with good stuff"
+                c.append("while ")
 
             elif isinstance(node, Then_Node):
-                print "mhhhh, fill my with good stuff"
+                c.append(":")
+                c.append("\n")
 
             elif isinstance(node, Else_Node):
-                print "mhhhh, fill my with good stuff"
+                c.append("else ")
 
             elif isinstance(node, If_Node):
-                print "mhhhh, fill my with good stuff"
+                c.append("if ")
 
             elif isinstance(node, Assignment_Node):
-                print "mhhhh, fill my with good stuff"
+                c.append(node.target_id)
+                c.append(" = ")
+                for child in node.get_children():
+                    nodes.append(child)
+                c.append("\n")
 
             elif isinstance(node, Expression_Node):
-                print "mhhhh, fill my with good stuff"
+                c.append(str(node.expression_string))
 
             elif isinstance(node, Node):
-                print "mhhhh, fill my with good stuff"
+                print "unexpected case in generator : generic node given"
+                for child in node.get_children():
+                    nodes.append(child)
 
             else:
-                print "unexpected case in generator : generic node given"
+                print "unexpected case in generator : no node type found"
+                
+            #for child in node.get_children():
+            #    nodes.append(child)
 
-            for child in node.get_children():
-                nodes.append(child)
 
         self.output = lst_import + c
 
