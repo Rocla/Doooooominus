@@ -3,6 +3,7 @@ import os
 from lf_lexer import LF_Lexer
 from lf_parser import LF_Parser
 from lf_generator import LF_Generator
+from lf_python import Python
 
 # Reserved words
 reserved_words = {
@@ -120,12 +121,18 @@ def main(args):
     parser.setup()
     parser.parse(input, debug=0)
     parser.setup_ast()
-    parser.print_ast(True)
+    parser.print_ast(False)
 
-    generator = LF_Generator(parser.ast)
-    generator.generate()
-    generator.print_code(True)
-    generator.save(args[1])
+    #generator = LF_Generator(parser.ast)
+    #generator.generate()
+    #generator.print_code(True)
+    #generator.save(args[1])
+
+    python = Python()
+    python.set_ast(parser.get_ast())
+    python.build_python()
+    python.generate_python_code()
+    python.print_python_code(True)
 
     print("")
     print("aedificavit prospere!")
