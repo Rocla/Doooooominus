@@ -158,7 +158,8 @@ class LF_Parser:
     def p_value_real(self, p):
         """value : REAL"""
         number_node = Number_Node()
-        number_node.set_value(p[1])
+        universal_number = p[1].replace(',', '.')
+        number_node.set_value(universal_number)
         number_node.set_value_type("real")
         p[0] = number_node
 
