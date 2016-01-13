@@ -13,60 +13,70 @@ class LF_Generator:
         #Lit of the import name needed encounter  when generation
         lst_import = []
         #List of the code generated
-        c = []
+        lst_code = []
 
         #Travel the tree and generate code
-        nodes = [self.ast.get_root()]
-        while len(nodes) != 0:
-            node = nodes.pop(len(nodes) - 1)
+        self.recurationDelLaMouerta(self.ast.get_root(), lst_import, lst_code, 0)
+        self.output = lst_import + lst_code
 
-            #indent the code
-            for i in range(node.get_ast_depth()):
-                c.append("\t")
-
-            if isinstance(node, Print_Node):
-                c.append("\n")
-                c.append("print ")
-
-            elif isinstance(node, Number_Node):
-                c.append(str(node.value))
-
-            elif isinstance(node, Operation_Node):
-                c.append(str(node.operation))
-
-            elif isinstance(node, While_Node):
-                c.append("while ")
-
-            elif isinstance(node, Then_Node):
-                c.append(":")
-                c.append("\n")
-
-            elif isinstance(node, Else_Node):
-                c.append("else ")
-
-            elif isinstance(node, If_Node):
-                c.append("\n")
-                c.append("if ")
-
-            elif isinstance(node, Assignment_Node):
-                c.append("\n")
-                c.append(node.target_id)
-                c.append(" = ")
-
-            elif isinstance(node, Expression_Node):
-                c.append(str(node.expression_string))
-
-            elif isinstance(node, Node):
-                print "unexpected case in generator : generic node given"
-
-            else:
-                print "unexpected case in generator : no node type found"
-
+    def recurationDelLaMouerta(self, node, lst_import, c, indent):
+        if isinstance(node, Print_Node):
+            for i in range(indent):
+                c.append("T\tT")
+            c.append("print ")
             for child in node.get_children():
-                nodes.append(child)
+                self.recurationDelLaMouerta(child, lst_import, c, indent)
+            c.append("\n")
+
+        elif isinstance(node, Number_Node):
+            c.append(str(node.value))
+
+        elif isinstance(node, Operation_Node):
+            c.append(str(node.operation))
+
+        elif isinstance(node, While_Node):
+            c.append("while ")
+
+        #elif isinstance(node, Then_Node):
+
+        elif isinstance(node, Else_Node):
+            c.append("else ")
+
+        elif isinstance(node, If_Node):
+            for i in range(indent):
+                c.append("T\tT")
+            c.append("if ")
+            t = list(node.get_children())
+            self.recurationDelLaMouerta(t.pop(1), lst_import, c, indent)
+            c.append(":")
+            c.append("\n")
+            for child in t:
+                self.recurationDelLaMouerta(child, lst_import, c, indent+1)
+            c.append("\n")
+            c.append("\n")
 
 
-        self.output = lst_import + c
+        elif isinstance(node, Assignment_Node):
+            for i in range(indent):
+                c.append("T\tT")
+            c.append(node.target_id)
+            c.append(" = ")
+            for child in node.get_children():
+                self.recurationDelLaMouerta(child, lst_import, c, indent)
+            c.append("\n")
+
+        elif isinstance(node, Expression_Node):
+            c.append(str(node.expression_string))
+            for child in node.get_children():
+                self.recurationDelLaMouerta(child, lst_import, c, indent)
+
+        elif isinstance(node, Node):
+            print "unexpected case in generator : generic node given"
+            for child in node.get_children():
+                self.recurationDelLaMouerta(child, lst_import, c, indent)
+
+        else:
+            print "unexpected case in generator : no node type found"
 
 
     def print_code(self, verbose=False):
