@@ -1,64 +1,25 @@
 from lf_ast import *
 
 # Reserved words HARD COPY FROM COMPILER.PY => TO FIX
-reserved_words = {
-
-    # Conditions
-    'alterum': 'IF',
-    'aut': 'ELSE',
-    'ergo': 'THEN',
-    'initium': 'BEGIN',
-    'exitus': 'END',
-    'facite': 'DO',
-    'iterum': 'WHILE',
-    'perfectus': 'DONE',
-
-    # Display
-    'scriptor': 'PRINT',
-
-    # Assignment
-    'est': 'ASSIGN',
+arithmetic_words = {
 
     # Arithmetic operators
-    'multiplico': 'TIMES',
-    'addo': 'PLUS',
-    'minus': 'MINUS',
-    'divide': 'DIVIDE',
+    'multiplico': '*',
+    'addo': '+',
+    'minus': '-',
+    'divide': '/',
 
     # Logic operators
-    'et': 'AND',
-    'vel': 'OR',
-    'xor': 'XOR',
-    'non': 'NOT',
-    'vera': 'TRUE',
-    'falsa': 'FALSE',
+    'et': ' and ',
+    'vel': ' or ',
+    'xor': ' xor ',
+    'non': ' not ',
 
     # Relational operators
-    'humilior': 'LOWERTHEN',
-    'maior': 'GREATERTHEN',
-    'idem': 'EQUAL',
-    # 'humilior vel idem': 'LOWEREQUAL', # do it in the parser
-    # 'maior vel idem': 'GREATEREQUAL', # do it in the parser
-    'diversus': 'NOTEQUAL',
-
-    # Words
-    'principium': 'STRINGSTART',
-    'sententia': 'SENTENTIA',
-    'finis': 'STRINGSTOP',
-
-    # Comment
-    'comment': 'COMMENT',
-
-    # Brain fuck specific
-    'dextram': 'GORIGHT',
-    'sinistram': 'GOLEFT',
-    'incrementum': 'INCREMENT',
-    'decrementum': 'DECREMENT',
-    'dum': 'WHILESTART',
-    'dumes': 'WHILEEND',
-    'imprimo': 'BFPRINT',
-    'lectito': 'READ',
-
+    'humilior': '<',
+    'maior': '>',
+    'idem': '=',
+    'diversus': '!=',
 }
 
 class LF_Generator:
@@ -74,10 +35,10 @@ class LF_Generator:
         lst_import = []
 
         #Travel the tree and generate code
-        lst_code = self.recurationDelLaMouerta(self.ast.get_root(), lst_import, 0)
+        lst_code = self.recurationDelLaMouerta(self.ast.get_root(), lst_import)
         self.output = lst_import + lst_code
 
-    def recurationDelLaMouerta(self, node, lst_import, indent):
+    def recurationDelLaMouerta(self, node, lst_import, indent=0):
         c = []
 
         if isinstance(node, Print_Node):
@@ -89,44 +50,74 @@ class LF_Generator:
             c.append("\n")
 
         elif isinstance(node, Number_Node):
-            c.append(str(node.value))
+            v = node.value
+            if v.startswith("variable_"):
+                c.append(v[9:])
+            else:
+                c.append(v)
 
         elif isinstance(node, Operation_Node):
             c.append(str(node.operation))
 
         elif isinstance(node, While_Node):
-            c.append("while ")
+            for i in range(indent):
+                c.append("T\tT")
+            c.append("While ")
+            t = list(node.get_children())
+            c = c+self.recurationDelLaMouerta(t.pop(len(t)-1), lst_import, indent)
+            c.append(": \n")
+            for child in t:
+                c = c+list(reversed(self.recurationDelLaMouerta(child, lst_import, indent+1)))
+            c.append("\n")
 
         elif isinstance(node, Else_Node):
-            c.append("else ")
+            for child in node.get_children():
+                c = c+self.recurationDelLaMouerta(child, lst_import, indent+1)
+            c.append("else :\n")
+
+        elif isinstance(node, Then_Node):
+            for child in node.get_children():
+                c = c+self.recurationDelLaMouerta(child, lst_import, indent+1)
 
         elif isinstance(node, If_Node):
             for i in range(indent):
                 c.append("T\tT")
             c.append("if ")
             t = list(node.get_children())
-            c = c+self.recurationDelLaMouerta(t.pop(1), lst_import, indent)
-            c.append(":")
-            c.append("\n")
-            for child in t:
-                c = c+self.recurationDelLaMouerta(child, lst_import, indent+1)
-            c.append("\n")
-            c.append("\n")
+            c = c+self.recurationDelLaMouerta(t.pop(len(t)-1), lst_import, indent)
+            c.append(":\n")
+
+            for child in reversed(t):
+                c = c+self.recurationDelLaMouerta(child, lst_import, indent)
+
 
         elif isinstance(node, Assignment_Node):
             for i in range(indent):
                 c.append("T\tT")
-            c.append(node.target_id)
+            c.append(node.target_id[9:])
             c.append(" = ")
             for child in node.get_children():
                 c = c+self.recurationDelLaMouerta(child, lst_import, indent)
             c.append("\n")
 
         elif isinstance(node, Expression_Node):
-            self.evalExpression(node.expression_stack)
-            c.append(str(node.expression_string))
-            for child in node.get_children():
-                c = c+self.recurationDelLaMouerta(child, lst_import, indent)
+            s = list(reversed(node.expression_stack))
+            m = []
+            while len(s) > 0:
+                if s[len(s)-1][0] in arithmetic_words:
+                    m1 = m.pop()
+                    m2 = m.pop()
+                    sub = ""
+                    sub += str(self.recurationDelLaMouerta(m2[1], lst_import, indent)[0])
+                    sub += str(arithmetic_words[s.pop()[0]])
+                    sub += str(self.recurationDelLaMouerta(m1[1], lst_import, indent)[0])
+                    m.insert(0, ("("+sub+")", Number_Node(value="("+sub+")")))
+                    print "S : "+"".join([x[0] for x in m])
+                else:
+                    m.append(s.pop())
+                    print "\nM : "+str(m)
+
+            c.append("".join([x[0] for x in m]))
 
         elif isinstance(node, Node):
             print "unexpected case in generator : generic node given"
@@ -137,18 +128,6 @@ class LF_Generator:
             print "unexpected case in generator : no node type found"
 
         return list(reversed(c))
-
-
-    def evalExpression(self, stack):
-        for i in stack:
-            val = i[0]
-
-            if val in reserved_words:
-                
-
-            if val.startswith("variable_"):
-                print "JOIE"
-            print "TOTOT" + str(val)
 
     def print_code(self, verbose=False):
         if verbose:
@@ -162,3 +141,19 @@ class LF_Generator:
 
     def getCodeFormatted(self):
         return "".join(self.output)
+
+    def is_number(s):
+        try:
+            float(s)
+            return True
+        except ValueError:
+            pass
+
+        try:
+            import unicodedata
+            unicodedata.numeric(s)
+            return True
+        except (TypeError, ValueError):
+            pass
+
+        return False
