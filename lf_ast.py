@@ -120,12 +120,14 @@ class AST:
         self.current_node = node
 
     def print_current_symbols(self):
-        print("\nThe known symbols so far are:")
+        print("")
+        print("The known symbols so far are:")
         for symbol in self.current_node.get_current_symbols():
             print(symbol)
 
     def print_ast(self):
-        print("\nAbstract syntax tree: [depth] [node name]")
+        print("")
+        print("Abstract syntax tree: [depth] [node name]")
         nodes = [self.get_root()]
         while len(nodes) != 0:
             node = nodes.pop(len(nodes) - 1)
@@ -147,14 +149,12 @@ class AST:
 
 class Expression_Node(Node):
     def __init__(self, parent=None, children=None, node_name=None, current_depth=None, current_symbols=None,
-                 expression_ast_root=None, expression_type=None, expression_stack=None, expression_string=None,
-                 expression_python=None):
+                 expression_ast_root=None, expression_type=None, expression_stack=None, expression_string=None):
         Node.__init__(self, parent, children, node_name, current_depth, current_symbols)
         self.expression_ast_root = expression_ast_root
         self.expression_type = expression_type
         self.expression_stack = expression_stack
         self.expression_string = expression_string
-        self.expression_python = expression_python
 
     def get_expression_ast_root(self):
         return self.expression_ast_root
@@ -180,13 +180,7 @@ class Expression_Node(Node):
     def set_expression_string(self, expression_string):
         self.expression_string = expression_string
 
-    def get_expression_python(self):
-        return self.expression_python
-
-    def set_expression_python(self, expression_python):
-        self.expression_python = expression_python
-
-    def build_expression_stack(self):
+    def build_stack_expression(self):
         nodes = [self.get_expression_ast_root()]
         expression_stack = []
         expression_string = ""
@@ -224,12 +218,11 @@ class Expression_Node(Node):
 
 class Assignment_Node(Node):
     def __init__(self, parent=None, children=None, node_name=None, current_depth=None, current_symbols=None,
-                 target_id=None, expression_node=None, expression_type=None, expression_python=None):
+                 target_id=None, expression_node=None, expression_type=None):
         Node.__init__(self, parent, children, node_name, current_depth, current_symbols)
         self.target_id = target_id
         self.expression_node = expression_node
         self.expression_type = expression_type
-        self.expression_python = expression_python
 
     def get_target_id(self):
         return self.target_id
@@ -249,31 +242,18 @@ class Assignment_Node(Node):
     def set_expression_type(self, expression_type):
         self.expression_type = expression_type
 
-    def get_expression_python(self):
-        return self.expression_python
-
-    def set_expression_python(self, expression_python):
-        self.expression_python = expression_python
-
 
 class If_Node(Node):
     def __init__(self, parent=None, children=None, node_name=None, current_depth=None, current_symbols=None,
-                 expression_type=None, expression_python=None):
+                 expression_type=None):
         Node.__init__(self, parent, children, node_name, current_depth, current_symbols)
         self.expression_type = expression_type
-        self.expression_python = expression_python
 
     def get_expression_type(self):
         return self.expression_type
 
     def set_expression_type(self, expression_type):
         self.expression_type = expression_type
-
-    def get_expression_python(self):
-        return self.expression_python
-
-    def set_expression_python(self, expression_python):
-        self.expression_python = expression_python
 
 
 class Else_Node(Node):
@@ -288,11 +268,10 @@ class Then_Node(Node):
 
 class While_Node(Node):
     def __init__(self, parent=None, children=None, node_name=None, current_depth=None, current_symbols=None,
-                 expression_node=None, expression_type=None, expression_python=None):
+                 expression_node=None, expression_type=None):
         Node.__init__(self, parent, children, node_name, current_depth, current_symbols)
         self.expression_node = expression_node
         self.expression_type = expression_type
-        self.expression_python = expression_python
 
     def get_expression_node(self):
         return self.expression_node
@@ -305,12 +284,6 @@ class While_Node(Node):
 
     def set_expression_type(self, expression_type):
         self.expression_type = expression_type
-
-    def get_expression_python(self):
-        return self.expression_python
-
-    def set_expression_python(self, expression_python):
-        self.expression_python = expression_python
 
 
 class Operation_Node(Node):
@@ -362,19 +335,12 @@ class Number_Node(Node):
 
 class Print_Node(Node):
     def __init__(self, parent=None, children=None, node_name=None, current_depth=None, current_symbols=None,
-                 expression_type=None, expression_python=None):
+                 expression_type=None):
         Node.__init__(self, parent, children, node_name, current_depth, current_symbols)
         self.expression_type = expression_type
-        self.expression_python = expression_python
 
     def set_expression_type(self, expression_type):
         self.expression_type = expression_type
 
     def get_expression_type(self):
         return self.expression_type
-
-    def get_expression_python(self):
-        return self.expression_python
-
-    def set_expression_python(self, expression_python):
-        self.expression_python = expression_python

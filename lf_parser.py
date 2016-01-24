@@ -69,49 +69,49 @@ class LF_Parser:
 
     def p_instruction_print(self, p):
         """instruction : PRINT expression DOT"""
-        print_node = Print_Node()
-        print_node.set_name("print")
-        print_node.set_ast_depth(self.get_ast_depth())
-        print_node.set_parent(self.ast.get_current_node())
-        self.ast.get_current_node().add_child(print_node)
+        print_instruction = Print_Node()
+        print_instruction.set_name("print")
+        print_instruction.set_ast_depth(self.get_ast_depth())
+        print_instruction.set_parent(self.ast.get_current_node())
+        self.ast.get_current_node().add_child(print_instruction)
 
-        expression_node = Expression_Node()
-        expression_node.set_name("expression")
-        expression_node.set_ast_depth(self.get_ast_depth())
-        expression_node.set_parent(print_node)
-        expression_node.set_expression_ast_root(p[2])
-        expression_node.build_expression_stack()
+        expression = Expression_Node()
+        expression.set_name("expression")
+        expression.set_ast_depth(self.get_ast_depth())
+        expression.set_parent(print_instruction)
+        expression.set_expression_ast_root(p[2])
+        expression.build_stack_expression()
 
-        print_node.add_child(expression_node)
-        print_node.set_expression_type(expression_node.get_expression_type())
+        print_instruction.add_child(expression)
+        print_instruction.set_expression_type(expression.get_expression_type())
 
     def p_instruction_assignment(self, p):
         """instruction : ID ASSIGN expression DOT"""
-        assign_node = Assignment_Node()
-        assign_node.set_name("assignment")
-        assign_node.set_target_id("variable_" + p[1])
-        assign_node.set_ast_depth(self.get_ast_depth())
-        assign_node.set_parent(self.ast.get_current_node())
+        assignment_instruction = Assignment_Node()
+        assignment_instruction.set_name("assignment")
+        assignment_instruction.set_target_id("variable_" + p[1])
+        assignment_instruction.set_ast_depth(self.get_ast_depth())
+        assignment_instruction.set_parent(self.ast.get_current_node())
 
-        self.ast.get_current_node().add_child(assign_node)
+        self.ast.get_current_node().add_child(assignment_instruction)
 
-        expression_node = Expression_Node()
-        expression_node.set_name("expression")
-        expression_node.set_ast_depth(self.get_ast_depth())
-        expression_node.set_parent(assign_node)
-        expression_node.set_expression_ast_root(p[3])
+        expression = Expression_Node()
+        expression.set_name("expression")
+        expression.set_ast_depth(self.get_ast_depth())
+        expression.set_parent(assignment_instruction)
+        expression.set_expression_ast_root(p[3])
 
-        expression_node.build_expression_stack()
+        expression.build_stack_expression()
 
-        assign_node.add_child(expression_node)
-        assign_node.set_expression_type(expression_node.get_expression_type())
-        assign_node.get_parent().add_symbol("variable_" + p[1], expression_node.get_expression_type())
+        assignment_instruction.add_child(expression)
+        assignment_instruction.set_expression_type(expression.get_expression_type())
+        assignment_instruction.get_parent().add_symbol("variable_" + p[1], expression.get_expression_type())
 
     def p_value_id(self, p):
         """value : ID"""
-        number_node = Number_Node()
-        number_node.set_value("variable_" + p[1])
-        p[0] = number_node
+        number = Number_Node()
+        number.set_value("variable_" + p[1])
+        p[0] = number
 
         if not self.ast.get_current_node().check_symbol("variable_" + p[1]):
             print("ERROR: " + p[1] + " is not a declared variable")
@@ -119,16 +119,16 @@ class LF_Parser:
                 print self.ast.print_current_symbols()
             sys.exit()
 
-        number_node.set_is_variable(True)
-        number_node.set_value_type(self.ast.get_current_node().get_symbol_type("variable_" + p[1]))
+        number.set_is_variable(True)
+        number.set_value_type(self.ast.get_current_node().get_symbol_type("variable_" + p[1]))
 
     def p_value_id_signed(self, p):
         """value : sign_arithmetic_operation ID
         | term_arithmetic_operation ID"""
-        number_node = Number_Node()
-        number_node.set_sign(p[1])
-        number_node.set_value("variable_" + p[2])
-        p[0] = number_node
+        number = Number_Node()
+        number.set_sign(p[1])
+        number.set_value("variable_" + p[2])
+        p[0] = number
 
         if not self.ast.get_current_node().check_symbol("variable_" + p[2]):
             print("ERROR: " + p[2] + " is not a declared variable")
@@ -136,41 +136,41 @@ class LF_Parser:
                 print self.ast.print_current_symbols()
             sys.exit()
 
-        number_node.set_is_variable(True)
-        number_node.set_value_type(self.ast.get_current_node().get_symbol_type("variable_" + p[2]))
+        number.set_is_variable(True)
+        number.set_value_type(self.ast.get_current_node().get_symbol_type("variable_" + p[2]))
 
     def p_value_integer(self, p):
         """value : INTEGER"""
-        number_node = Number_Node()
-        number_node.set_value(p[1])
-        number_node.set_value_type("integer")
-        p[0] = number_node
+        number = Number_Node()
+        number.set_value(p[1])
+        number.set_value_type("integer")
+        p[0] = number
 
     def p_value_integer_signed(self, p):
         """value : sign_arithmetic_operation INTEGER
         | term_arithmetic_operation INTEGER"""
-        number_node = Number_Node()
-        number_node.set_sign(p[1])
-        number_node.set_value(p[2])
-        number_node.set_value_type("integer")
-        p[0] = number_node
+        number = Number_Node()
+        number.set_sign(p[1])
+        number.set_value(p[2])
+        number.set_value_type("integer")
+        p[0] = number
 
     def p_value_real(self, p):
         """value : REAL"""
-        number_node = Number_Node()
-        universal_number = p[1].replace(',', '.')
-        number_node.set_value(universal_number)
-        number_node.set_value_type("real")
-        p[0] = number_node
+        number = Number_Node()
+        universal_number_check = p[1].replace(',', '.')
+        number.set_value(universal_number_check)
+        number.set_value_type("real")
+        p[0] = number
 
     def p_value_real_signed(self, p):
         """value : sign_arithmetic_operation REAL
         | term_arithmetic_operation REAL"""
-        number_node = Number_Node()
-        number_node.set_sign(p[1])
-        number_node.set_value(p[2])
-        number_node.set_value_type("real")
-        p[0] = number_node
+        number = Number_Node()
+        number.set_sign(p[1])
+        number.set_value(p[2])
+        number.set_value_type("real")
+        p[0] = number
 
     def p_value_expression_parenthesis(self, p):
         """value : LEFTPARENTHESIS expression RIGHTPARENTHESIS"""
@@ -200,11 +200,11 @@ class LF_Parser:
 
     def p_expression_equality_comparison(self, p):
         """expression : expression relational_equality_operation comparison"""
-        operation_node = Operation_Node()
-        operation_node.set_operation(p[2])
-        operation_node.add_child(p[1])
-        operation_node.add_child(p[3])
-        p[0] = operation_node
+        logic_operation = Operation_Node()
+        logic_operation.set_operation(p[2])
+        logic_operation.add_child(p[1])
+        logic_operation.add_child(p[3])
+        p[0] = logic_operation
 
     def p_expression_comparison(self, p):
         """expression : comparison"""
@@ -212,11 +212,11 @@ class LF_Parser:
 
     def p_comparison_arithmetic_expression_operations(self, p):
         """comparison : comparison relational_inequality_operation arithmetic_expression"""
-        operation_node = Operation_Node()
-        operation_node.set_operation(p[2])
-        operation_node.add_child(p[1])
-        operation_node.add_child(p[3])
-        p[0] = operation_node
+        logic_operation = Operation_Node()
+        logic_operation.set_operation(p[2])
+        logic_operation.add_child(p[1])
+        logic_operation.add_child(p[3])
+        p[0] = logic_operation
 
     def p_comparison_arithmetic_expression(self, p):
         """comparison : arithmetic_expression"""
@@ -224,11 +224,11 @@ class LF_Parser:
 
     def p_arithmetic_expression_arithmetic_operation(self, p):
         """arithmetic_expression : arithmetic_expression sign_arithmetic_operation expression_term"""
-        operation_node = Operation_Node()
-        operation_node.set_operation(p[2])
-        operation_node.add_child(p[1])
-        operation_node.add_child(p[3])
-        p[0] = operation_node
+        logic_operation = Operation_Node()
+        logic_operation.set_operation(p[2])
+        logic_operation.add_child(p[1])
+        logic_operation.add_child(p[3])
+        p[0] = logic_operation
 
     def p_arithmetic_expression_expression_term(self, p):
         """arithmetic_expression : expression_term"""
@@ -236,11 +236,11 @@ class LF_Parser:
 
     def p_expression_term_arithmetic_operation(self, p):
         """expression_term : expression_term term_arithmetic_operation value"""
-        operation_node = Operation_Node()
-        operation_node.set_operation(p[2])
-        operation_node.add_child(p[1])
-        operation_node.add_child(p[3])
-        p[0] = operation_node
+        logic_operation = Operation_Node()
+        logic_operation.set_operation(p[2])
+        logic_operation.add_child(p[1])
+        logic_operation.add_child(p[3])
+        p[0] = logic_operation
 
     def p_expression_term_value(self, p):
         """expression_term : value"""
@@ -248,51 +248,51 @@ class LF_Parser:
 
     def p_instruction_if_start(self, p):
         """if_start : IF"""
-        ifnode = If_Node()
-        ifnode.set_name("if")
-        ifnode.set_ast_depth(self.get_ast_depth())
-        ifnode.set_parent(self.ast.get_current_node())
+        condition_if = If_Node()
+        condition_if.set_name("if")
+        condition_if.set_ast_depth(self.get_ast_depth())
+        condition_if.set_parent(self.ast.get_current_node())
 
-        self.ast.get_current_node().add_child(ifnode)
+        self.ast.get_current_node().add_child(condition_if)
 
-        self.ast.set_current_node(ifnode)
+        self.ast.set_current_node(condition_if)
 
     def p_instruction_if_expression(self, p):
         """if_expression : expression"""
-        if_expression_node = Expression_Node()
-        if_expression_node.set_name("if_expression")
-        if_expression_node.set_ast_depth(self.get_ast_depth())
-        if_expression_node.set_parent(self.ast.get_current_node())
-        if_expression_node.set_expression_ast_root(p[1])
+        expression_if = Expression_Node()
+        expression_if.set_name("if_expression")
+        expression_if.set_ast_depth(self.get_ast_depth())
+        expression_if.set_parent(self.ast.get_current_node())
+        expression_if.set_expression_ast_root(p[1])
 
-        if_expression_node.build_expression_stack()
+        expression_if.build_stack_expression()
 
-        self.ast.get_current_node().add_child(if_expression_node)
-        self.ast.get_current_node().set_expression_type(if_expression_node.get_expression_type())
+        self.ast.get_current_node().add_child(expression_if)
+        self.ast.get_current_node().set_expression_type(expression_if.get_expression_type())
 
     def p_instruction_if_then_begin(self, p):
         """if_then_begin : THEN BEGIN"""
-        then_node = Then_Node()
-        then_node.set_name("then")
-        then_node.set_ast_depth(self.get_ast_depth())
-        then_node.set_parent(self.ast.get_current_node())
+        condition_then = Then_Node()
+        condition_then.set_name("then")
+        condition_then.set_ast_depth(self.get_ast_depth())
+        condition_then.set_parent(self.ast.get_current_node())
 
-        self.ast.get_current_node().add_child(then_node)
+        self.ast.get_current_node().add_child(condition_then)
 
-        self.ast.set_current_node(then_node)
+        self.ast.set_current_node(condition_then)
 
         self.ast_depth_increment()
 
     def p_instruction_if_else_begin(self, p):
         """if_else_begin : ELSE BEGIN"""
-        else_node = Else_Node()
-        else_node.set_name("else")
-        else_node.set_ast_depth(self.get_ast_depth() - 1)
-        else_node.set_parent(self.ast.get_current_node().get_parent())
+        condition_else = Else_Node()
+        condition_else.set_name("else")
+        condition_else.set_ast_depth(self.get_ast_depth() - 1)
+        condition_else.set_parent(self.ast.get_current_node().get_parent())
 
-        self.ast.get_current_node().get_parent().add_child(else_node)
+        self.ast.get_current_node().get_parent().add_child(condition_else)
 
-        self.ast.set_current_node(else_node)
+        self.ast.set_current_node(condition_else)
 
     def p_instruction_if_statement(self, p):
         """instruction : if_start if_expression if_then_begin statements END DOT"""
@@ -308,27 +308,27 @@ class LF_Parser:
 
     def p_instruction_while_start(self, p):
         """while_start : WHILE"""
-        whilenode = While_Node()
-        whilenode.set_name("while")
-        whilenode.set_ast_depth(self.get_ast_depth())
-        whilenode.set_parent(self.ast.get_current_node())
+        condition_while = While_Node()
+        condition_while.set_name("while")
+        condition_while.set_ast_depth(self.get_ast_depth())
+        condition_while.set_parent(self.ast.get_current_node())
 
-        self.ast.get_current_node().add_child(whilenode)
+        self.ast.get_current_node().add_child(condition_while)
 
-        self.ast.set_current_node(whilenode)
+        self.ast.set_current_node(condition_while)
 
     def p_instruction_while_expression(self, p):
         """while_expression : expression"""
-        while_expression_node = Expression_Node()
-        while_expression_node.set_name("while_expression")
-        while_expression_node.set_ast_depth(self.get_ast_depth())
-        while_expression_node.set_parent(self.ast.get_current_node())
-        while_expression_node.set_expression_ast_root(p[1])
+        expression_while = Expression_Node()
+        expression_while.set_name("while_expression")
+        expression_while.set_ast_depth(self.get_ast_depth())
+        expression_while.set_parent(self.ast.get_current_node())
+        expression_while.set_expression_ast_root(p[1])
 
-        while_expression_node.build_expression_stack()
+        expression_while.build_stack_expression()
 
-        self.ast.get_current_node().add_child(while_expression_node)
-        self.ast.get_current_node().set_expression_type(while_expression_node.get_expression_type())
+        self.ast.get_current_node().add_child(expression_while)
+        self.ast.get_current_node().set_expression_type(expression_while.get_expression_type())
         self.ast_depth_increment()
 
     def p_instruction_while_body(self, p):
