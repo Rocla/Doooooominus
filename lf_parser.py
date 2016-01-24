@@ -329,10 +329,10 @@ class LF_Parser:
 
         self.ast.get_current_node().add_child(while_expression_node)
         self.ast.get_current_node().set_expression_type(while_expression_node.get_expression_type())
+        self.ast_depth_increment()
 
     def p_instruction_while_body(self, p):
         """while_body : DO statements DONE DOT"""
-        self.ast_depth_increment()
 
     def p_instruction_while_statement(self, p):
         """instruction : while_start while_expression while_body"""
@@ -348,7 +348,3 @@ class LF_Parser:
             print("Linea numerus:  %s" % (str(p.lineno)))
             print("Token position: %s" % (str(p.lexpos)))
         sys.exit()
-
-
-
-
