@@ -73,6 +73,15 @@ def t_TABULATION(t):
     r'\t'
     return t
 
+# t_GoLeft = r'\<'
+# t_GoRight = r'\>;'
+# t_Print = r'\.'
+# t_Read = r','
+# t_Increase = r'\+'
+# t_Decrease = r'\-'
+# t_WhileStart = r'\['
+# t_WhileEnd = r'\]'
+
 
 "---------------------------------------"
 "   OUTPUT                              "
