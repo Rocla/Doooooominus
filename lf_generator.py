@@ -43,7 +43,7 @@ class LF_Generator:
 
         if isinstance(node, Print_Node):
             for i in range(indent):
-                c.append("T\tT")
+                c.append("\t")
             c.append("print ")
             for child in node.get_children():
                 c=c+self.recurationDelLaMouerta(child, lst_import, indent)
@@ -61,7 +61,7 @@ class LF_Generator:
 
         elif isinstance(node, While_Node):
             for i in range(indent):
-                c.append("T\tT")
+                c.append("\t")
             c.append("While ")
             t = list(node.get_children())
             c = c+self.recurationDelLaMouerta(t.pop(len(t)-1), lst_import, indent)
@@ -81,7 +81,7 @@ class LF_Generator:
 
         elif isinstance(node, If_Node):
             for i in range(indent):
-                c.append("T\tT")
+                c.append("\t")
             c.append("if ")
             t = list(node.get_children())
             c = c+self.recurationDelLaMouerta(t.pop(len(t)-1), lst_import, indent)
@@ -93,7 +93,7 @@ class LF_Generator:
 
         elif isinstance(node, Assignment_Node):
             for i in range(indent):
-                c.append("T\tT")
+                c.append("\t")
             c.append(node.target_id[9:])
             c.append(" = ")
             for child in node.get_children():
@@ -112,15 +112,18 @@ class LF_Generator:
                     sub += str(arithmetic_words[s.pop()[0]])
                     sub += str(self.recurationDelLaMouerta(m1[1], lst_import, indent)[0])
                     m.insert(0, ("("+sub+")", Number_Node(value="("+sub+")")))
-                    print "S : "+"".join([x[0] for x in m])
                 else:
-                    m.append(s.pop())
-                    print "\nM : "+str(m)
+                    x = s.pop()
+                    m.append(self.recurationDelLaMouerta(x, lst_import, indent)[0])
+                    print m
 
-            c.append("".join([x[0] for x in m]))
+            tmp = "".join([x[0] for x in m])
+            if tmp.startswith("(") and tmp.endswith(")"):
+                tmp = tmp[1:len(tmp)-1]
+
+            c.append(tmp)
 
         elif isinstance(node, Node):
-            print "unexpected case in generator : generic node given"
             for child in node.get_children():
                 c = c+self.recurationDelLaMouerta(child, lst_import, indent)
 

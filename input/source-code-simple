@@ -13,6 +13,6 @@ initium
 exitus.
 
 tree est 0,1.
-taco est 2,3 addo 3,0 divide tree.
+taco est (2,3 addo 3,0) divide tree.
 
 scriptor taco.

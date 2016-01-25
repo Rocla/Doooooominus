@@ -121,7 +121,7 @@ def main(args):
     parser.setup()
     parser.parse(input, debug=0)
     parser.setup_ast()
-    parser.print_ast(True)
+    parser.print_ast(False)
 
     generator = LF_Generator(parser.ast)
     generator.generate()
