@@ -1,22 +1,31 @@
 # Doooooominus
+- Projet de Compilateur
 - Mini-Rapport
 - Autheurs: Romain Claret \& Nils Ryter
+- Abstract: Développement d'un interpréteur d'une langue inventé proche du latin en python.
 
 # Table des matières
-
-Introduction	3
-- Avis personnel	3
-- Mon approche du projet	3
-Objectif	4
-- Accompli	4
-- Inaccompli	4
-Apprentissage	5
+- Contexte....................................5
+- But.............................................5
+- Déroulement...............................5
+- Fonctionnalités...........................5
+	- Affectation..........................5
+	- Structure conditionnelle.....6
+	- Structure itérative..............6
+	- Lecture...............................6
+	- Structure arithmétique.......6
+	- Structure relationnelle........7
+	- Structure de priorité...........7
+	- Structure du texte sacrée....7
+	- Les secrets de notre berger..8
+- Exemple de prière d'amour.........8
+- Exemple de prière finabocienne...9
 
 # Rapport technique
 
 ## Contexte
 
-C'est dans le cadre du projet de compilateur que nous avons réalisé ce langage merveilleux dont plus d'un romain serait jaloux : Doooooominus !
+C'est dans le cadre du projet de compilateur que nous avons réalisé ce langage merveilleux dont plus d'un romain serait jaloux: Doooooominus!
 
 ## But
 
@@ -27,17 +36,17 @@ Au début, nous pensions compiler pour une machine de Turing ou une machine brai
 Nous avons donc choisi de changer notre cible à fin de pouvoir répandre la volonté de notre seigneur en interprétant nos chants sur n'importe quelle machine à l'aide de notre pierre de rosette, **python**.
 
 ## Fonctionnalités
-Notre programme prend en charge les ordres sacrés suivants :
+Notre programme prend en charge les ordres sacrés suivants:
 
 ### Affectation
 
-Il est effet possible de pouvoir définir une variable avec la syntaxe suivante et/ou de lui affecter/réaffecter une nouvelle valeur :
+Il est effet possible de pouvoir définir une variable avec la syntaxe suivante et/ou de lui affecter/réaffecter une nouvelle valeur:
 
 - **est**: assigner
 
 ### Structure conditionnelle
 
-Dieu dans sa grande bonté nous a donné les conditions « if » des langages dits courants. La condition se termine par un « then » qui s'écrit « ergo ». Puis suit le bloc d'instruction encapsulée dans une clause « begin-end » qui se nome « initum-exitus ». L'alternative est possible avec le mot-clé « else », sans oublier la clause « begin-end ». Merci, divin bienfaiteur.
+Dieu dans sa grande bonté nous a donné les conditions **if** des langages dits courants. La condition se termine par un **then** qui s'écrit **ergo**. Puis suit le bloc d'instruction encapsulée dans une clause **begin-end** qui se nome **initum-exitus**. L'alternative est possible avec le mot-clé **else**, sans oublier la clause **begin-end**. Merci, divin bienfaiteur.
 
 - **alterum**: if
 - **ergo**: then
@@ -54,7 +63,7 @@ C'est par la répétition que nous comprenons la volonté du puissant ! Pour ré
 - **iterum**: while
 - **perfectus**: done
 
-### Display
+### Lecture
 
 À quoi servirait de nous donner des instructions si nous, pauvre être doté d'une capacité de compréhension limitée, ne pouvons interpréter les ordres de type sacré.
 
@@ -97,7 +106,7 @@ Cependant, certains mots sont encore trop fort pour notre compréhension. C'est 
 
 - **comment**: #
 
-## Exemple de prière 1
+## Exemple de prière d'amour
 
 Dans le but de comprendre notre compilateur, chantons ensemble, à la gloire de dieu, "Nous t'aimons seigneur".
 
@@ -122,28 +131,73 @@ Dans le but de comprendre notre compilateur, chantons ensemble, à la gloire de 
 Dans sa grande bonté, l'invocation résulte en:
 
 > caious = 1
+
 > while caious<3:
-> > caious = caious+1
+
+>> caious = caious+1
 
 > banana = 3
+
 > if banana>2:
+
 >> pistachio = 1+banana
-	print variable_pistachio
+
+>> print variable_pistachio
 
 > else :
+
 >> print 5*banana
 
 > tree = 0.1
+
 > taco = (2.3+3.0)/tree
+
 > print variable_taco
+
 > if banana<=caious:
+
 >> print variable_taco
 
 > babaorom = 1
+
 > while babaorom!=3:
+
 >> babaorom = babaorom+1
 
 > if banana>=caious:
->> print variable_taco`
+
+>> print variable_taco
+
+## Exemple de prière finabocienne
+
+### Premier verset
+> comment variablus utilisatorus changeous !
+fibovalous est 5. comment fobonatchus algoritmus ! diabolus est 0. angelus est 1. sesera est 0.
+
+### Deuxième verset
+> iterum fibovalous maior 0 facite fibovalous est fibovalous minus 1. angelus est sesera. diabolus est angelus. sesera est diabolus addo angelus. perfectus. scriptor diabolus.
+
+La rosetta stone nous donne:
+
+> fibovalous = 5
+
+> diabolus = 0
+
+> angelus = 1
+
+> sesera = 0
+
+> while fibovalous>0:
+
+>>	sesera = diabolus+angelus
+
+>>	diabolus = angelus
+
+>>	angelus = sesera
+	
+>>	fibovalous = fibovalous-1
+
+> print diabolus
+
 
 Vous, bien heureux, qui avez lu ces saintes paroles, partez rependre les chants divins et exquis de notre tout puissant seigneur, Flying Spagetti Monster.

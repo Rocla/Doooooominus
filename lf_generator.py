@@ -67,12 +67,12 @@ class LF_Generator:
             c.append(": \n")
             for child in t:
                 c = c+list(reversed(self.recurationDelLaMouerta(child, lst_import, indent+1)))
-            #c.append("\n")
+            c.append("\n")
 
         elif isinstance(node, Else_Node):
             for child in node.get_children():
                 c = c+self.recurationDelLaMouerta(child, lst_import, indent+1)
-            c.append("else :\n")
+            c.append("\nelse :\n")
 
         elif isinstance(node, Then_Node):
             for child in node.get_children():
@@ -88,6 +88,8 @@ class LF_Generator:
 
             for child in reversed(t):
                 c = c+self.recurationDelLaMouerta(child, lst_import, indent)
+
+            c.append("\n")
 
 
         elif isinstance(node, Assignment_Node):

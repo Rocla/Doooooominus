@@ -1,18 +1,4 @@
-comment variablus utilisatorus changeous.
-n est 5.
+comment variablus utilisatorus changeous !
+fibovalous est 5. comment fobonatchus algoritmus ! diabolus est 0. angelus est 1. sesera est 0.
 
-comment fobonatchus algoritmus.
-
-first est 0.
-second est 1.
-tmp est 0.
-
-iterum n maior 0
-facite
-    n est n minus 1.
-    second est tmp.
-    first est second.
-    tmp est first addo second.
-perfectus.
-
-scriptor first.
+iterum fibovalous maior 0 facite fibovalous est fibovalous minus 1. angelus est sesera. diabolus est angelus. sesera est diabolus addo angelus. perfectus. scriptor diabolus.
