@@ -113,15 +113,13 @@ class LF_Generator:
                     sub += str(self.recurationDelLaMouerta(m1[1], lst_import, indent)[0])
                     m.insert(0, ("("+sub+")", Number_Node(value="("+sub+")")))
                 else:
-                    x = s.pop()
-                    m.append(self.recurationDelLaMouerta(x, lst_import, indent)[0])
-                    print m
+                    m.append(s.pop())
 
             tmp = "".join([x[0] for x in m])
             if tmp.startswith("(") and tmp.endswith(")"):
                 tmp = tmp[1:len(tmp)-1]
-
             c.append(tmp)
+
 
         elif isinstance(node, Node):
             for child in node.get_children():

@@ -30,12 +30,12 @@ reserved_words = {
     'divide': 'DIVIDE',
 
     # Logic operators
-    'et': 'AND',
-    'vel': 'OR',
-    'xor': 'XOR',
-    'non': 'NOT',
-    'vera': 'TRUE',
-    'falsa': 'FALSE',
+    #'et': 'AND',
+    #'vel': 'OR',
+    #'xor': 'XOR',
+    #'non': 'NOT',
+    #'vera': 'TRUE',
+    #'falsa': 'FALSE',
 
     # Relational operators
     'humilior': 'LOWERTHEN',
@@ -46,22 +46,22 @@ reserved_words = {
     'diversus': 'NOTEQUAL',
 
     # Words
-    'principium': 'STRINGSTART',
-    'sententia': 'SENTENTIA',
-    'finis': 'STRINGSTOP',
+    #'principium': 'STRINGSTART',
+    #'sententia': 'SENTENTIA',
+    #'finis': 'STRINGSTOP',
 
     # Comment
     'comment': 'COMMENT',
 
     # Brain fuck specific
-    'dextram': 'GORIGHT',
-    'sinistram': 'GOLEFT',
-    'incrementum': 'INCREMENT',
-    'decrementum': 'DECREMENT',
-    'dum': 'WHILESTART',
-    'dumes': 'WHILEEND',
-    'imprimo': 'BFPRINT',
-    'lectito': 'READ',
+    #'dextram': 'GORIGHT',
+    #'sinistram': 'GOLEFT',
+    #'incrementum': 'INCREMENT',
+    #'decrementum': 'DECREMENT',
+    #'dum': 'WHILESTART',
+    #'dumes': 'WHILEEND',
+    #'imprimo': 'BFPRINT',
+    #'lectito': 'READ',
 
 }
 
@@ -134,4 +134,4 @@ def main(args):
 
 if __name__ == "__main__":
     # main(["input/source-code", "compiled/source-code"])
-    main(["input/source-code-simple", "compiled/compiled-code"])
+    main(["input/source-code", "compiled/compiled-code"])
