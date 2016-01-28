@@ -76,26 +76,74 @@ Le pouvoir de comparaison n'a pas été difficile à nous léguer. Nous pauvres 
 - **humilior**: plus petit que
 - **maior**: plus grand que
 - **idem**: égal
+- **diversus**: pas égal
+- **humiliorem**: plus petit ou égal à
+- **miaom**: plus grand ou égal à
+
+### Structure de priorité
+
+Certes, les priorités sont grandes chez notre divin. Il faut ainsi que nous puissions prioriser les ordres délicieux reçus.
+
+- **(**: ouverture de la priorité
+- **)**: fermeture de la priorité
+
+### Structure du texte sacrée
+
+La puissance de notre miséricordieux est transmise par les mathématiques. Pour ceci, la suite de caractère se donne en temps que nombre naturel ou réel. La réalité est toujours présente pour nous tous. Il faut aussi noter qu’après une multitude de morts due à une deficitant en oxygène, notre infini guide nous permeta de respirer durant la lecture chantée des saints textes à d'un symbole, le point. Merci pour votre bonté mon Dieu.
 
 ### Les secrets de notre berger
 
-Cependant, certains mots sont encore trop fort pour notre compréhension. C'est pourquoi ils sont masqués à nos yeux.
+Cependant, certains mots sont encore trop fort pour notre compréhension. C'est pourquoi ils sont masqués à nos yeux. C'est un phrase qui commence par un comment et fini par un point d'exclamation !
 
 - **comment**: #
 
-## Exemple
+## Exemple de prière 1
 
 Dans le but de comprendre notre compilateur, chantons ensemble, à la gloire de dieu, "Nous t'aimons seigneur".
 
 ### Premier verset
-> a est 1. iterum a humilior 3 facite a est a addo 1. perfectus. a est 1. banana est 3.
+> caious est 1. iterum caious humilior 3 facite caious est caious addo 1. perfectus.
 
 ### Deuxième verset
-> alterum banana maior 2 ergo initium pistachio est 1 addo banana. scriptor pistachio. exitus.
+> banana est 3. alterum banana maior 2 ergo initium pistachio est 1 addo banana. scriptor pistachio. exitus aut initium scriptor 5 multiplico banana. exitus.
 
 ### Troisième verset
-> tree est 0,1. taco est 2,3 addo 3,0 multiplico tree. scriptor taco.
+> tree est 0,1. comment your end is coming ! taco est (2,3 addo 3,0) divide tree. scriptor taco.
+
+### Quatrième verset
+> alterum banana humiliorem caious ergo initium scriptor taco. exitus.
+
+### Cinquième verset
+> babaorom est 1. iterum babaorom diversus 3 facite babaorom est babaorom addo 1. perfectus.
+
+### Sixième verset
+> alterum banana miaom caious ergo initium scriptor taco. exitus.
 
 Dans sa grande bonté, l'invocation résulte en:
+
+> caious = 1
+> while caious<3:
+> > caious = caious+1
+
+> banana = 3
+> if banana>2:
+>> pistachio = 1+banana
+	print variable_pistachio
+
+> else :
+>> print 5*banana
+
+> tree = 0.1
+> taco = (2.3+3.0)/tree
+> print variable_taco
+> if banana<=caious:
+>> print variable_taco
+
+> babaorom = 1
+> while babaorom!=3:
+>> babaorom = babaorom+1
+
+> if banana>=caious:
+>> print variable_taco`
 
 Vous, bien heureux, qui avez lu ces saintes paroles, partez rependre les chants divins et exquis de notre tout puissant seigneur, Flying Spagetti Monster.

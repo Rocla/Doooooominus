@@ -104,4 +104,4 @@ def main(args):
 
 if __name__ == "__main__":
     # main(["input/source-code", "compiled/source-code"])
-    main(["input/source-code-simple", "compiled/compiled-code"])
+    main(["input/source-code", "compiled/compiled-code"])
