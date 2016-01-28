@@ -53,10 +53,7 @@ class LF_Generator:
 
         elif isinstance(node, Number_Node):
             v = node.value
-            if v.startswith("variable_"):
-                c.append(v[9:])
-            else:
-                c.append(v)
+            c.append(v)
 
         elif isinstance(node, Operation_Node):
             c.append(str(node.operation))
@@ -96,7 +93,7 @@ class LF_Generator:
         elif isinstance(node, Assignment_Node):
             for i in range(indent):
                 c.append("\t")
-            c.append(node.target_id[9:])
+            c.append(node.target_id)
             c.append(" = ")
             for child in node.get_children():
                 c = c+self.recurationDelLaMouerta(child, lst_import, indent)
@@ -115,7 +112,8 @@ class LF_Generator:
                     sub += str(self.recurationDelLaMouerta(m1[1], lst_import, indent)[0])
                     m.insert(0, ("("+sub+")", Number_Node(value="("+sub+")")))
                 else:
-                    m.append(s.pop())
+                    x = s.pop()
+                    m.append((x))
 
             tmp = "".join([x[0] for x in m])
             if tmp.startswith("(") and tmp.endswith(")"):
