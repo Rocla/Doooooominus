@@ -50,21 +50,13 @@ Le « if » des langage courant s'écrit « alterum ». La condition est ter
 
 ### Display
 - **scriptor**: PRINT
-  
+
 
 ### Arithmetic operators
 - **multiplico**: TIMES
 - **addo**: PLUS
 - **minus**: MINUS
 - **divide**: DIVIDE
-
-### Logic operators
-- **et**: AND
-- **vel**: OR
-- **xor**: XOR
-- **non**: NOT
-- **vera**: TRUE
-- **falsa**: FALSE
 
 ### Relational operators
 - **humilior**: LOWERTHEN
