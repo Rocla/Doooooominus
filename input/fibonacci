@@ -9,9 +9,10 @@ tmp est 0.
 
 iterum n maior 0
 facite
-    tmp est first addo second.
-    first est second.
+    n est n minus 1.
     second est tmp.
+    first est second.
+    tmp est first addo second.
 perfectus.
 
 scriptor first.

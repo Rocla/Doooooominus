@@ -115,6 +115,7 @@ class LF_Generator:
                     x = s.pop()
                     m.append((x))
 
+
             tmp = "".join([x[0] for x in m])
             if tmp.startswith("(") and tmp.endswith(")"):
                 tmp = tmp[1:len(tmp)-1]
