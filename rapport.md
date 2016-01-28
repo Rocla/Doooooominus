@@ -77,6 +77,12 @@ Le pouvoir de comparaison n'a pas été difficile à nous léguer. Nous pauvres 
 - **maior**: plus grand que
 - **idem**: égal
 
+### Les secrets de notre berger
+
+Cependant, certains mots sont encore trop fort pour notre compréhension. C'est pourquoi ils sont masqués à nos yeux.
+
+- **comment**: #
+
 ## Exemple
 
 Dans le but de comprendre notre compilateur, chantons ensemble, à la gloire de dieu, "Nous t'aimons seigneur".

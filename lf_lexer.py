@@ -7,10 +7,6 @@ class LF_Lexer:
     t_RIGHTPARENTHESIS = r'\)'
     t_DOT = r'.'
 
-    # TMP
-    t_LOWEREQUAL = r'<='
-    t_GREATEREQUAL = r'>='
-
     t_ignore = ' \t'
 
     def __init__(self, tokens, reserved_words):
@@ -18,7 +14,7 @@ class LF_Lexer:
         self.reserved_words = reserved_words
 
     def t_comment(self, t):
-        r'comment.+\n'
+        r'comment.+.'
         t.lexer.lineno += 1
 
     def t_ID(self, t):

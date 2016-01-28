@@ -29,39 +29,13 @@ reserved_words = {
     'minus': 'MINUS',
     'divide': 'DIVIDE',
 
-    # Logic operators
-    #'et': 'AND',
-    #'vel': 'OR',
-    #'xor': 'XOR',
-    #'non': 'NOT',
-    #'vera': 'TRUE',
-    #'falsa': 'FALSE',
-
     # Relational operators
     'humilior': 'LOWERTHEN',
     'maior': 'GREATERTHEN',
     'idem': 'EQUAL',
-    # 'humilior vel idem': 'LOWEREQUAL', # do it in the parser
-    # 'maior vel idem': 'GREATEREQUAL', # do it in the parser
     'diversus': 'NOTEQUAL',
-
-    # Words
-    #'principium': 'STRINGSTART',
-    #'sententia': 'SENTENTIA',
-    #'finis': 'STRINGSTOP',
-
-    # Comment
-    'comment': 'COMMENT',
-
-    # Brain fuck specific
-    #'dextram': 'GORIGHT',
-    #'sinistram': 'GOLEFT',
-    #'incrementum': 'INCREMENT',
-    #'decrementum': 'DECREMENT',
-    #'dum': 'WHILESTART',
-    #'dumes': 'WHILEEND',
-    #'imprimo': 'BFPRINT',
-    #'lectito': 'READ',
+    'humiliorem': 'LOWEREQUAL',
+    'miaom': 'GREATEREQUAL',
 
 }
 
@@ -81,10 +55,6 @@ tokens = [
 
     # Delimiter
     'DOT',
-
-    # TMP: Relational operators
-    'LOWEREQUAL',
-    'GREATEREQUAL',
 
 ]
 
@@ -134,4 +104,4 @@ def main(args):
 
 if __name__ == "__main__":
     # main(["input/source-code", "compiled/source-code"])
-    main(["input/source-code", "compiled/compiled-code"])
+    main(["input/source-code-simple", "compiled/compiled-code"])

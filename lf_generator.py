@@ -18,8 +18,10 @@ arithmetic_words = {
     # Relational operators
     'humilior': '<',
     'maior': '>',
-    'idem': '=',
+    'idem': '==',
     'diversus': '!=',
+    'humiliorem': '<=',
+    'miaom': '>=',
 }
 
 class LF_Generator:
@@ -62,13 +64,13 @@ class LF_Generator:
         elif isinstance(node, While_Node):
             for i in range(indent):
                 c.append("\t")
-            c.append("While ")
+            c.append("while ")
             t = list(node.get_children())
             c = c+self.recurationDelLaMouerta(t.pop(len(t)-1), lst_import, indent)
             c.append(": \n")
             for child in t:
                 c = c+list(reversed(self.recurationDelLaMouerta(child, lst_import, indent+1)))
-            c.append("\n")
+            #c.append("\n")
 
         elif isinstance(node, Else_Node):
             for child in node.get_children():

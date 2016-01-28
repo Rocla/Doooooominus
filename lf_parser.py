@@ -199,7 +199,7 @@ class LF_Parser:
         p[0] = p[1]
 
     def p_expression_equality_comparison(self, p):
-        """expression : expression relational_equality_operation comparison"""
+        """expression : expression relational_equality_operation  comparison"""
         logic_operation = Operation_Node()
         logic_operation.set_operation(p[2])
         logic_operation.add_child(p[1])
