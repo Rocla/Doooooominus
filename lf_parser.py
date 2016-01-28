@@ -9,6 +9,7 @@ class LF_Parser:
         self.tokens = tokens
         self.ast_depth = 0
         self.ast = AST()
+        self.prefix_variable = ""
 
         root = Node()
         root.set_name("root")
@@ -89,7 +90,7 @@ class LF_Parser:
         """instruction : ID ASSIGN expression DOT"""
         assignment_instruction = Assignment_Node()
         assignment_instruction.set_name("assignment")
-        assignment_instruction.set_target_id("variable_" + p[1])
+        assignment_instruction.set_target_id(self.prefix_variable + p[1])
         assignment_instruction.set_ast_depth(self.get_ast_depth())
         assignment_instruction.set_parent(self.ast.get_current_node())
 
@@ -105,39 +106,39 @@ class LF_Parser:
 
         assignment_instruction.add_child(expression)
         assignment_instruction.set_expression_type(expression.get_expression_type())
-        assignment_instruction.get_parent().add_symbol("variable_" + p[1], expression.get_expression_type())
+        assignment_instruction.get_parent().add_symbol(self.prefix_variable + p[1], expression.get_expression_type())
 
     def p_value_id(self, p):
         """value : ID"""
         number = Number_Node()
-        number.set_value("variable_" + p[1])
+        number.set_value(self.prefix_variable + p[1])
         p[0] = number
 
-        if not self.ast.get_current_node().check_symbol("variable_" + p[1]):
+        if not self.ast.get_current_node().check_symbol(self.prefix_variable + p[1]):
             print("ERROR: " + p[1] + " is not a declared variable")
             if self.verbose:
                 print self.ast.print_current_symbols()
             sys.exit()
 
         number.set_is_variable(True)
-        number.set_value_type(self.ast.get_current_node().get_symbol_type("variable_" + p[1]))
+        number.set_value_type(self.ast.get_current_node().get_symbol_type(self.prefix_variable + p[1]))
 
     def p_value_id_signed(self, p):
         """value : sign_arithmetic_operation ID
         | term_arithmetic_operation ID"""
         number = Number_Node()
         number.set_sign(p[1])
-        number.set_value("variable_" + p[2])
+        number.set_value(self.prefix_variable + p[2])
         p[0] = number
 
-        if not self.ast.get_current_node().check_symbol("variable_" + p[2]):
+        if not self.ast.get_current_node().check_symbol(self.prefix_variable + p[2]):
             print("ERROR: " + p[2] + " is not a declared variable")
             if self.verbose:
                 print self.ast.print_current_symbols()
             sys.exit()
 
         number.set_is_variable(True)
-        number.set_value_type(self.ast.get_current_node().get_symbol_type("variable_" + p[2]))
+        number.set_value_type(self.ast.get_current_node().get_symbol_type(self.prefix_variable + p[2]))
 
     def p_value_integer(self, p):
         """value : INTEGER"""

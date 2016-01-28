@@ -1,0 +1,17 @@
+comment variablus utilisatorus changeous.
+n est 5.
+
+comment fobonatchus algoritmus.
+
+first est 0.
+second est 1.
+tmp est 0.
+
+iterum n maior 0
+facite
+    tmp est first addo second.
+    first est second.
+    second est tmp.
+perfectus.
+
+scriptor first.

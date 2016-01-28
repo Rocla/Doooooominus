@@ -90,7 +90,7 @@ def main(args):
     parser.setup()
     parser.parse(input, debug=0)
     parser.setup_ast()
-    parser.print_ast(False)
+    parser.print_ast(True)
 
     # Run of the LF 2 Python converter
     generator = LF_Generator(parser.ast)
@@ -103,5 +103,4 @@ def main(args):
 
 
 if __name__ == "__main__":
-    # main(["input/source-code", "compiled/source-code"])
     main(["input/source-code", "compiled/compiled-code"])
