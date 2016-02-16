@@ -1,8 +1,8 @@
 # Doooooominus
 - Projet de Compilateur
 - Mini-Rapport
-- Autheurs: Romain Claret \& Nils Ryter
-- Abstract: Développement d'un interpréteur d'une langue inventé proche du latin en python.
+- Auteurs: Romain Claret \& Nils Ryter
+- Abstract: Développement d'un interpréteur d'une langue inventée proche du latin en python.
 
 # Table des matières
 - Contexte....................................5
@@ -16,10 +16,10 @@
 	- Structure arithmétique.......6
 	- Structure relationnelle........7
 	- Structure de priorité...........7
-	- Structure du texte sacrée....7
+	- Structure du texte sacré....7
 	- Les secrets de notre berger..8
 - Exemple de prière d'amour.........8
-- Exemple de prière finabocienne...9
+- Exemple de prière finaboccienne...9
 
 # Rapport technique
 
@@ -33,7 +33,7 @@ Notre objectif a été de réaliser un compilateur qui interprète un magnifique
 
 ## Déroulement
 Au début, nous pensions compiler pour une machine de Turing ou une machine brainfuck, mais la distance entre notre langue sacrée en latin et ceux-ci aurait rendu le projet trop complexe.
-Nous avons donc choisi de changer notre cible à fin de pouvoir répandre la volonté de notre seigneur en interprétant nos chants sur n'importe quelle machine à l'aide de notre pierre de rosette, **python**.
+Nous avons donc choisi de changer notre cible afin de pouvoir répandre la volonté de notre seigneur en interprétant nos chants sur n'importe quelle machine à l'aide de notre pierre de rosette, **python**.
 
 ## Fonctionnalités
 Notre programme prend en charge les ordres sacrés suivants:
@@ -46,7 +46,7 @@ Il est effet possible de pouvoir définir une variable avec la syntaxe suivante 
 
 ### Structure conditionnelle
 
-Dieu dans sa grande bonté nous a donné les conditions **if** des langages dits courants. La condition se termine par un **then** qui s'écrit **ergo**. Puis suit le bloc d'instruction encapsulée dans une clause **begin-end** qui se nome **initum-exitus**. L'alternative est possible avec le mot-clé **else**, sans oublier la clause **begin-end**. Merci, divin bienfaiteur.
+Dieu dans sa grande bonté nous a donné les conditions **if** des langages dits courants. La condition se termine par un **then** qui s'écrit **ergo**. Puis suit le bloc d'instruction encapsulé dans une clause **begin-end** qui se nome **initum-exitus**. L'alternative est possible avec le mot-clé **else**, sans oublier la clause **begin-end**. Merci, divin bienfaiteur.
 
 - **alterum**: if
 - **ergo**: then
@@ -65,7 +65,7 @@ C'est par la répétition que nous comprenons la volonté du puissant ! Pour ré
 
 ### Lecture
 
-À quoi servirait de nous donner des instructions si nous, pauvre être doté d'une capacité de compréhension limitée, ne pouvons interpréter les ordres de type sacré.
+À quoi servirait de nous donner des instructions si nous, pauvres êtres dotés d'une capacité de compréhension limitée, ne pouvons interpréter les ordres de type sacré ?
 
 - **scriptor**: imprimer au terminel
 
@@ -80,7 +80,7 @@ Après de nombreuses négociations entre notre saint seigneur et son épouse, no
 
 ### Structure relationnelle
 
-Le pouvoir de comparaison n'a pas été difficile à nous léguer. Nous pauvres humains sommes infiniment inférieurs à notre Dieu, et qui lui même est de puissance humiliante face à sa femme qui tient les rênes de notre monde.
+Le pouvoir de comparaison n'a pas été difficile à nous léguer. Nous pauvres humains sommes infiniment inférieurs à notre dieu, et qui lui même est de puissance humiliante face à sa femme qui tient les rênes de notre monde.
 
 - **humilior**: plus petit que
 - **maior**: plus grand que
@@ -98,11 +98,11 @@ Certes, les priorités sont grandes chez notre divin. Il faut ainsi que nous pui
 
 ### Structure du texte sacrée
 
-La puissance de notre miséricordieux est transmise par les mathématiques. Pour ceci, la suite de caractère se donne en temps que nombre naturel ou réel. La réalité est toujours présente pour nous tous. Il faut aussi noter qu’après une multitude de morts due à une deficitant en oxygène, notre infini guide nous permeta de respirer durant la lecture chantée des saints textes à d'un symbole, le point. Merci pour votre bonté mon Dieu.
+La puissance de notre miséricordieux est transmise par les mathématiques. Pour ceci, la suite de caractère se donne en temps que nombre naturel ou réel. La réalité est toujours présente pour nous tous. Il faut aussi noter qu’après une multitude de morts dues à un déficit en oxygène, notre infini guide nous permit de respirer durant la lecture chantée des saints textes à l'aide d'un symbole, le point. Merci pour votre bonté mon Dieu.
 
 ### Les secrets de notre berger
 
-Cependant, certains mots sont encore trop fort pour notre compréhension. C'est pourquoi ils sont masqués à nos yeux. C'est un phrase qui commence par un comment et fini par un point d'exclamation !
+Cependant, certains mots sont encore trop forts pour notre compréhension. C'est pourquoi ils sont masqués à nos yeux. C'est un phrase qui commence par un comment et fini par un point d'exclamation !
 
 - **comment**: #
 
@@ -168,7 +168,7 @@ Dans sa grande bonté, l'invocation résulte en:
 
 >> print variable_taco
 
-## Exemple de prière finabocienne
+## Exemple de prière finaboccienne
 
 ### Premier verset
 > comment variablus utilisatorus changeous !
@@ -177,7 +177,7 @@ fibovalous est 5. comment fobonatchus algoritmus ! diabolus est 0. angelus est 1
 ### Deuxième verset
 > iterum fibovalous maior 0 facite fibovalous est fibovalous minus 1. angelus est sesera. diabolus est angelus. sesera est diabolus addo angelus. perfectus. scriptor diabolus.
 
-La rosetta stone nous donne:
+La pierre de rosette nous donne:
 
 > fibovalous = 5
 
@@ -194,10 +194,10 @@ La rosetta stone nous donne:
 >>	diabolus = angelus
 
 >>	angelus = sesera
-	
+
 >>	fibovalous = fibovalous-1
 
 > print diabolus
 
 
-Vous, bien heureux, qui avez lu ces saintes paroles, partez rependre les chants divins et exquis de notre tout puissant seigneur, Flying Spagetti Monster.
+Vous, bien heureux, qui avez lu ces saintes paroles, partez rependre les chants divins et exquis de notre tout puissant seigneur, le Flying Spaghetti Monster.
